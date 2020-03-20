@@ -1,0 +1,125 @@
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Box?>
+<?import javafx.scene.control.TextField?>
+
+
+<BorderPane id="vbox" prefHeight="600" prefWidth="800"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="at.technikum.Controller.SampleController">
+    <top>
+        <VBox>
+            <MenuBar fx:id="menuBar">
+                <menus>
+                    <Menu text="File">
+                        <MenuItem text="New"/>
+                        <MenuItem text="Open"/>
+                        <MenuItem text="Save"/>
+                        <MenuItem text="Save As"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit"/>
+                    </Menu>
+                    <Menu text="Edit">
+                        <MenuItem text="Copy"/>
+                        <MenuItem text="Cut"/>
+                        <MenuItem text="Paste"/>
+                    </Menu>
+                    <Menu text="Options">
+                        <MenuItem text="1"/>
+                        <MenuItem text="2"/>
+                        <MenuItem text="3"/>
+                    </Menu>
+                    <Menu text="Help" style="-fx-alignment: bottom-right">
+                        <MenuItem text="Search" disable="true"/>
+                        <MenuItem text="Online Manual" visible="false"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="About"/>
+                    </Menu>
+                </menus>
+
+            </MenuBar>
+            <HBox>
+                <Label text="Search:" style="-fx-font-size:16px; -fx-padding: 10px; -fx-border-insets: 10px; -fx-background-insets: 10px;"></Label>
+                <TextField prefWidth="700"
+                        style="-fx-font-size:16px; -fx-padding: 10px; -fx-border-insets: 10px; -fx-background-insets: 10px;">
+                </TextField>
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <left>
+        <VBox>
+            <padding>
+                <Insets left="10" right="20" top="10" bottom="10"></Insets>
+            </padding>
+            <VBox id="search" prefHeight="400" prefWidth="500"
+                  style="-fx-background-color: blueviolet"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox>
+            <padding>
+                <Insets left="10" right="20" top="10" bottom="10"></Insets>
+            </padding>
+            <HBox>
+                <Button text="IPTC" prefHeight="40" prefWidth="80"></Button>
+                <Box width="20"></Box>
+                <Button text="EXIF" prefHeight="40" prefWidth="80"></Button>
+            </HBox>
+
+            <Label style="-fx-font-size:14px;">
+                <padding>
+                    <Insets left="10" right="20" top="10" bottom="10"></Insets>
+                </padding>
+                Search
+            </Label>
+
+        </VBox>
+    </center>
+
+    <bottom>
+
+        <VBox>
+            <padding>
+                <Insets left="10" right="20" top="10" bottom="10"></Insets>
+            </padding>
+            <VBox id="bottom" prefHeight="200" prefWidth="800"
+                  style="-fx-background-color: pink"/>
+        </VBox>
+
+    </bottom>
+
+    <!--    <center>
+            <GridPane
+                    xmlns:fx="http://javafx.com/fxml"
+                    hgap="10" vgap="10">
+
+                <VBox id="search" prefHeight="200" prefWidth="300" style="-fx-background-color: black"
+                      GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+                <VBox id="search" prefHeight="200" prefWidth="300" style="-fx-background-color: red"
+                      GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <VBox id="search" prefHeight="200" prefWidth="300" style="-fx-background-color: green"
+                      GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+                <VBox id="search" prefHeight="200" prefWidth="300" style="-fx-background-color: orange"
+                      GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            </GridPane>
+        </center>-->
+
+</BorderPane>
