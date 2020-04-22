@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+      <entry name="!?*.fxml" />
+    </wildcardResourcePatterns>
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
@@ -10,5 +23,10 @@
         <module name="PIC-DB.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PIC-DB" target="14" />
+      <module name="PIC-DB.main" target="14" />
+      <module name="PIC-DB.test" target="14" />
+    </bytecodeTargetLevel>
   </component>
 </project>

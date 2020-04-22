@@ -1,4 +1,4 @@
-package at.technikum.Presentation.Models;
+package at.technikum.PresentationModel;
 
 public class SearchPresentationModel {
 

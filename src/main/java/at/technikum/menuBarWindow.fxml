@@ -6,9 +6,47 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="at.technikum.Controller.Controller">
+    <HBox>
+        <MenuBar HBox.hgrow="ALWAYS" fx:id="menuBar">
+            <menus>
+                <Menu text="File">
+                    <MenuItem text="New"/>
+                    <MenuItem text="Open"/>
+                    <MenuItem text="Save"/>
+                    <MenuItem text="Save As"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Exit"/>
+                </Menu>
+                <Menu text="Edit">
+                    <MenuItem text="Copy"/>
+                    <MenuItem text="Cut"/>
+                    <MenuItem text="Paste"/>
+                </Menu>
+                <Menu text="Options">
+                    <MenuItem text="1"/>
+                    <MenuItem text="2"/>
+                    <MenuItem text="3"/>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <MenuBar fx:id="helpmenu">
+            <Menu text="Help">
+                <MenuItem disable="true" text="Search"/>
+                <MenuItem text="Online Manual" visible="false"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="About"/>
+            </Menu>
+        </MenuBar>
+    </HBox>
+    <HBox>
+        <Label style="-fx-font-size:16px; -fx-padding: 10px; -fx-border-insets: 10px; -fx-background-insets: 10px;"
+               text="Search:"/>
+        <TextField HBox.hgrow="ALWAYS"
+                   style="-fx-font-size:16px; -fx-padding: 10px; -fx-border-insets: 10px; -fx-background-insets: 10px;">
+        </TextField>
+    </HBox>
 
-</AnchorPane>
+</VBox>

@@ -1,5 +1,5 @@
 package at.technikum.Controller;
 
-public class SampleController extends AbstractController {
+public class Controller extends AbstractController {
 
 }

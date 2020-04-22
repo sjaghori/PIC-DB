@@ -38,9 +38,9 @@ public abstract class AbstractController implements Initializable {
         newStage.initModality(m);
         newStage.initOwner(stage);
         Scene scene = new Scene(root, 1024, 768);
-        scene.getStylesheets().add(
-                getClass().getResource("application.css").toExternalForm());
-        // more css by code
+        /*scene.getStylesheets().add(
+                getClass().getResource("application.css").toExternalForm());*/
+
         for (String css : cssList) {
             scene.getStylesheets().add(
                     getClass().getResource(css).toExternalForm());
