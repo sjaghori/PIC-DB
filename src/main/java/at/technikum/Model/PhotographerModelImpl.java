@@ -3,64 +3,63 @@ package at.technikum.Model;
 import at.technikum.interfaces.models.PhotographerModel;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 
 public class PhotographerModelImpl implements PhotographerModel {
     private int id;
     private String firstName;
     private String lastName;
-    private Date birthday;
+    private LocalDate birthday;
     private String notes;
 
 
     @Override
     public int getID() {
-        return 0;
+        return this.id;
     }
 
     @Override
     public void setID(int value) {
-
+        this.id = value;
     }
 
     @Override
     public String getFirstName() {
-        return null;
+        return this.firstName;
     }
 
     @Override
     public void setFirstName(String value) {
-
+        this.firstName = value;
     }
 
     @Override
     public String getLastName() {
-        return null;
+        return this.lastName;
     }
 
     @Override
     public void setLastName(String value) {
-
+        this.lastName = value;
     }
 
     @Override
     public LocalDate getBirthDay() {
-        return null;
+        return this.birthday;
     }
 
     @Override
     public void setBirthDay(LocalDate value) {
-
+        this.birthday = value;
     }
 
     @Override
     public String getNotes() {
-        return null;
+        return this.notes;
     }
 
     @Override
     public void setNotes(String value) {
-
+        this.notes = value;
     }
 }

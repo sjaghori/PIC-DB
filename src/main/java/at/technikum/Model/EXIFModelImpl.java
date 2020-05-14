@@ -5,51 +5,55 @@ import at.technikum.interfaces.models.EXIFModel;
 
 
 public class EXIFModelImpl implements EXIFModel {
+
     private String cameraModel;
+    private String make;
+    private double fNumber;
+    private double exposureTime;
+    private double isoValue;
     private float apertureNumber;
-    private float exposureTime;
-    private float isoValue;
     private Boolean flash;
+    private ExposurePrograms exposurePrograms;
 
 
     @Override
     public String getMake() {
-        return null;
+        return this.make;
     }
 
     @Override
     public void setMake(String value) {
-
+        this.make = value;
     }
 
     @Override
     public double getFNumber() {
-        return 0;
+        return this.fNumber;
     }
 
     @Override
     public void setFNumber(double value) {
-
+        this.fNumber = value;
     }
 
     @Override
     public double getExposureTime() {
-        return 0;
+        return this.exposureTime;
     }
 
     @Override
     public void setExposureTime(double value) {
-
+        this.exposureTime = value;
     }
 
     @Override
     public double getISOValue() {
-        return 0;
+        return this.isoValue;
     }
 
     @Override
     public void setISOValue(double value) {
-
+        this.isoValue = value;
     }
 
     @Override
@@ -59,16 +63,16 @@ public class EXIFModelImpl implements EXIFModel {
 
     @Override
     public void setFlash(boolean value) {
-
+        this.flash = value;
     }
 
     @Override
     public ExposurePrograms getExposureProgram() {
-        return null;
+        return this.exposurePrograms;
     }
 
     @Override
     public void setExposureProgram(ExposurePrograms value) {
-
+        this.exposurePrograms = value;
     }
 }

@@ -6,55 +6,59 @@ import at.technikum.interfaces.models.IPTCModel;
 import at.technikum.interfaces.models.PictureModel;
 
 public class PictureModelImpl implements PictureModel {
-
+    private int id;
+    private String filename;
+    private IPTCModel iptcModel;
+    private EXIFModel exifModel;
+    private CameraModel cameraModel;
 
     @Override
     public int getID() {
-        return 0;
+        return this.id;
     }
 
     @Override
     public void setID(int value) {
-
+        this.id = value;
     }
 
     @Override
     public String getFileName() {
-        return null;
+        return this.filename;
     }
 
     @Override
     public void setFileName(String value) {
-
+        this.filename = value;
     }
 
     @Override
     public IPTCModel getIPTC() {
-        return null;
+        return this.iptcModel;
     }
 
     @Override
     public void setIPTC(IPTCModel value) {
-
+        this.iptcModel = value;
     }
 
     @Override
     public EXIFModel getEXIF() {
-        return null;
+        return this.exifModel;
     }
 
     @Override
     public void setEXIF(EXIFModel value) {
-
+        this.exifModel = value;
     }
 
     @Override
     public CameraModel getCamera() {
-        return null;
+        return this.cameraModel;
     }
 
     @Override
     public void setCamera(CameraModel value) {
-
+        this.cameraModel = value;
     }
 }

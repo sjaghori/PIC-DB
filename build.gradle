@@ -33,7 +33,7 @@ mainClassName = 'at.technikum.Main'
 
 sourceSets.main {
     java {
-        srcDir 'src/main/java' //assume that your source codes are inside this path
+        srcDir 'src/main/java'
     }
 
     resources {
