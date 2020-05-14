@@ -16,16 +16,28 @@ import java.util.logging.Logger;
 public class Database {
 
     public static Properties readProperties() {
-        Properties props = new Properties();
-        Path myPath = Paths.get("db.properties");
+        // create and load default properties Properties
+        Properties defaultProps = new Properties();
+        Path defaultPropsPath = Paths.get("default.properties");
 
         try {
-            BufferedReader bf = Files.newBufferedReader(myPath, StandardCharsets.UTF_8);
-            props.load(bf);
+            BufferedReader bf = Files.newBufferedReader(defaultPropsPath, StandardCharsets.UTF_8);
+            defaultProps.load(bf);
         } catch (IOException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return props;
+
+        // create application properties with default
+        Properties applicationProps = new Properties(defaultProps);
+        Path applicationPropsPath = Paths.get("app.properties");
+
+        try {
+            BufferedReader bf = Files.newBufferedReader(applicationPropsPath, StandardCharsets.UTF_8);
+            applicationProps.load(bf);
+        } catch (IOException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return applicationProps;
     }
 
     /**

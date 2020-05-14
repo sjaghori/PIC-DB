@@ -1,7 +1,7 @@
 package at.technikum;
 
 import at.technikum.DataAccessLayer.Database;
-import at.technikum.Model.PhotographerModel;
+import at.technikum.Model.PhotographerModelImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +14,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         Database db = new Database();
         db.connect();
-        PhotographerModel photographerModel = new PhotographerModel();
-        photographerModel.setFirstName("Sasan");
-        photographerModel.setLastName("Jaghori");
-        System.out.println(photographerModel.toString());
         launch(args);
     }
 
