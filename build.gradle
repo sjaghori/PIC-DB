@@ -1,4 +1,5 @@
 plugins {
+    id "com.github.johnrengelman.shadow" version "5.2.0"
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.8'
@@ -17,11 +18,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.13'
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly 'org.projectlombok:lombok:1.18.12'
-    annotationProcessor 'org.projectlombok:lombok:1.18.12'
-    testCompileOnly 'org.projectlombok:lombok:1.18.12'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
 }
 
 javafx {
@@ -42,11 +38,26 @@ sourceSets.main {
     }
 }
 
+/*
 jar {
     manifest {
         attributes(
                 'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
                 'Main-Class': mainClassName
         )
+    }
+}
+
+ */
+
+// resolved Fat Jar Issue !!
+// https://stackoverflow.com/questions/52569724/javafx-11-create-a-jar-file-with-gradle/52571719#52571719
+mainClassName='at.technikum.Main'
+jar {
+    manifest {
+        attributes 'Main-Class': 'at.technikum.Main'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }

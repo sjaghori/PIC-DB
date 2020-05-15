@@ -39,7 +39,7 @@ public abstract class AbstractController implements Initializable {
         newStage.initOwner(stage);
         Scene scene = new Scene(root, 1024, 768);
         /*scene.getStylesheets().add(
-                getClass().getResource("application.css").toExternalForm());*/
+                getClass().getResource("stylesheet.css").toExternalForm());*/
 
         for (String css : cssList) {
             scene.getStylesheets().add(

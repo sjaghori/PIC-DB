@@ -6,11 +6,19 @@ import at.technikum.interfaces.models.IPTCModel;
 import at.technikum.interfaces.models.PictureModel;
 
 public class PictureModelImpl implements PictureModel {
+
     private int id;
     private String filename;
     private IPTCModel iptcModel;
     private EXIFModel exifModel;
     private CameraModel cameraModel;
+    private String path;
+
+    public PictureModelImpl(int id, String filename, String path) {
+        this.id = id;
+        this.filename = filename;
+        this.path = path;
+    }
 
     @Override
     public int getID() {

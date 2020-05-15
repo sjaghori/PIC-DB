@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="vbox" prefHeight="800" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.Controller.Controller">
+<BorderPane fx:id="root" prefHeight="800" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.Controller.MainController">
     <top>
         <fx:include source="menuBarWindow.fxml"/>
     </top>
@@ -18,10 +18,10 @@
                     <VBox>
                         <SplitPane dividerPositions="0.75" prefHeight="800.0">
                             <items>
-                                <StackPane layoutX="14.0" layoutY="14.0" prefHeight="400.0"
-                                           prefWidth="563.0" style="-fx-background-color: blue;"/>
+                                <StackPane layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="563.0"
+                                           style="-fx-background-color: blue;"/>
                                 <TabPane>
-                                    <Tab text="IPTC">
+                                    <Tab fx:id="iptc_tab" text="IPTC">
                                         <VBox>
                                             <ComboBox>
                                                 <items>
@@ -30,7 +30,7 @@
                                             </ComboBox>
                                         </VBox>
                                     </Tab>
-                                    <Tab text="EXIF">
+                                    <Tab fx:id="exif_tab" text="EXIF">
                                         <VBox>
                                             <ComboBox>
                                                 <items>

@@ -6,6 +6,13 @@ import at.technikum.interfaces.models.*;
 
 public interface DataAccessLayer {
 	/**
+	 * Returns a list of ALL Pictures from the directory, based on a database
+	 * query.
+	 *
+	 * @return
+	 */
+	Collection<PictureModel> getPictures() throws Exception;
+	/**
 	 * Returns a filterd list of Pictures from the directory, based on a
 	 * database query.
 	 * 
