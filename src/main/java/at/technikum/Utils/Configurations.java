@@ -16,7 +16,8 @@ public class Configurations {
     public static Properties readProperties() {
         // create and load default properties Properties
         java.util.Properties defaultProps = new java.util.Properties();
-        Path defaultPropsPath = Paths.get("default.properties");
+        Path defaultPropsPath = Paths.get(System.getProperty("user.dir") +
+                "\\src\\main\\resources\\default.properties");
 
         try {
             BufferedReader bf = Files.newBufferedReader(defaultPropsPath, StandardCharsets.UTF_8);

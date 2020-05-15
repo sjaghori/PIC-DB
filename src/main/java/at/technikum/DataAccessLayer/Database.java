@@ -8,20 +8,22 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class Database {
+
+    static Connection connection = null;
+
     /**
      * Connect to the MySQL database
      *
      * @return a Connection object
      */
-    public Connection connect() {
-        
+    public static Connection getConnection() {
+        if (connection != null) return connection;
+
         Properties properties = Configurations.readProperties();
 
         String url = properties.getProperty("db.url");
         String user = properties.getProperty("db.user");
         String passwd = properties.getProperty("db.passwd");
-
-        Connection connection = null;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");

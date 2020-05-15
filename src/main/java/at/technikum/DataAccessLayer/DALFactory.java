@@ -16,8 +16,7 @@ public class DALFactory {
         if(useMock) {
             return new DALMockImpl();
         } else {
-            Database db = new Database();
-            Connection connection = db.connect();
+            Connection connection = Database.getConnection();
             return new DALImpl(connection);
         }
     }
