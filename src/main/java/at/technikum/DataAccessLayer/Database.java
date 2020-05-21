@@ -2,6 +2,7 @@ package at.technikum.DataAccessLayer;
 
 import at.technikum.Utils.Configurations;
 
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

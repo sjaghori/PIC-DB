@@ -1,0 +1,80 @@
+* {
+    -fx-capri: #48BEFF;
+    -fx-aqua: #3dfaff;
+    -fx-ocean-green: #43c59e;
+    -fx-hookers-green: #3d7068;
+    -fx-msu-green: #14453d;
+}
+
+#save_button_iptc, #save_button_exif, #save_button_photographer {
+    -fx-pref-width: 400px;
+    -fx-pref-height: 50px;
+}
+
+#save_button_iptc:hover, #save_button_exif:hover, #save_button_photographer:hover {
+    -fx-background-color: -fx-capri;
+}
+
+#save_button_iptc:pressed, #save_button_exif:pressed, #save_button_photographer:pressed {
+    -fx-background-color: -fx-msu-green;
+}
+
+.button {
+    -fx-background-color: -fx-ocean-green;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 10px;
+    -fx-background-insets: 10px;
+    -fx-border-insets: 15px;
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100px;
+}
+
+.button:hover {
+    -fx-background-color: -fx-capri;
+}
+
+.button:pressed {
+    -fx-background-color: -fx-msu-green;
+}
+
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width:80px;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+}
+
+.tab-pane .tab:hover {
+    -fx-background-color: -fx-capri;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: -fx-ocean-green;
+}
+
+.tab-pane .tab:pressed {
+    -fx-background-color: -fx-msu-green;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: whitesmoke;
+}

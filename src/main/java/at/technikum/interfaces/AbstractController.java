@@ -1,4 +1,4 @@
-package at.technikum.Controller;;
+package at.technikum.interfaces;;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import at.technikum.Utils.*?>
 
-<BorderPane fx:id="root" prefHeight="800" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.Controller.MainController">
+<BorderPane fx:id="root" prefHeight="800" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.View.MainController">
     <top>
-        <fx:include source="menuBarWindow.fxml"/>
+        <fx:include source="View/menuBarWindow.fxml" />
     </top>
 
     <center>
@@ -18,37 +20,63 @@
                     <VBox>
                         <SplitPane dividerPositions="0.75" prefHeight="800.0">
                             <items>
-                                <StackPane layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="563.0"
-                                           style="-fx-background-color: blue;"/>
-                                <TabPane>
+                                <AnchorPane fx:id="imageView" minWidth="-Infinity" prefWidth="300.0">
+                                    <ImageView fx:id="imageBig" preserveRatio="true">
+                                    </ImageView>
+                                </AnchorPane>
+                                <TabPane minWidth="-Infinity" prefWidth="200.0" tabClosingPolicy="unavailable">
                                     <Tab fx:id="iptc_tab" text="IPTC">
-                                        <VBox>
-                                            <ComboBox>
-                                                <items>
-
-                                                </items>
-                                            </ComboBox>
-                                        </VBox>
+                                        <AnchorPane fx:id="iptcView">
+                                            <VBox spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                                <padding>
+                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                </padding>
+                                                <Label text="Description" />
+                                                <TextArea />
+                                                <Label text="Rating" />
+                                                <Slider blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                                                <Label text="Tags" />
+                                                <TextField />
+                                                <Button text="Save Changes" fx:id="save_button_iptc">
+                                                    <VBox.margin>
+                                                        <Insets top="10.0" />
+                                                    </VBox.margin>
+                                                </Button>
+                                            </VBox>
+                                        </AnchorPane>
                                     </Tab>
                                     <Tab fx:id="exif_tab" text="EXIF">
-                                        <VBox>
-                                            <ComboBox>
-                                                <items>
-
-                                                </items>
-                                            </ComboBox>
-                                        </VBox>
+                                        <AnchorPane fx:id="exifView">
+                                            <VBox spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                                <padding>
+                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                </padding>
+                                                <Label text="Camera" />
+                                                <TextField Binding.twoWay="{text=camera}"/>
+                                                <Label text="Date" />
+                                                <DatePicker Binding.twoWay="{text=date}"/>
+                                                <Label text="ISO" />
+                                                <TextField Binding.twoWay="{text=iso}"/>
+                                                <Label text="Aperture" />
+                                                <TextField Binding.twoWay="{text=aperture}"/>
+                                                <Button fx:id="save_button_exif" text="Save Changes" onMouseClicked="#onSaveChanges">
+                                                    <VBox.margin>
+                                                        <Insets top="10.0" />
+                                                    </VBox.margin>
+                                                </Button>
+                                            </VBox>
+                                        </AnchorPane>
                                     </Tab>
                                 </TabPane>
                             </items>
                         </SplitPane>
                     </VBox>
 
-                    <VBox>
-                        <children>
-                            <ListView/>
-                        </children>
-                    </VBox>
+                    <ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" vbarPolicy="NEVER">
+                        <AnchorPane>
+                            <HBox fx:id="pictureListView" fillHeight="false" spacing="10.0" />
+                        </AnchorPane>
+                    </ScrollPane>
                 </items>
             </SplitPane>
         </VBox>

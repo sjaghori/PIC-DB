@@ -19,7 +19,7 @@ public class ApplicationFX extends Application {
 
     public static void main(String[] args) throws Exception {
 
-        logger.debug("Hello from Log4j 2");
+        logger.info("Hello from Log4j 2");
 
         BusinessLayer businessLayer = new BusinessLayerImpl();
         PictureModel pictureModel = businessLayer.getPicture(2);
@@ -38,6 +38,7 @@ public class ApplicationFX extends Application {
         } catch (RuntimeException | IOException e) {
             e.printStackTrace();
         }
+        assert root != null;
         Scene scene = new Scene(root, 800, 800);
         scene.getStylesheets().add(String.valueOf(getClass().getResource("stylesheet.css")));
         primaryStage.setTitle("PIC DB");
