@@ -58,13 +58,13 @@ public class Binding {
     public static void setTwoWay(Node n, String binding) {
         Binding b = new Binding(n, binding, Mode.TWOWAY);
         addBinding(n, b);
-        System.out.println(String.format("Setting two way binding for %s", b));
+        //System.out.println(String.format("Setting two way binding for %s", b));
     }
 
     public static void setOneWay(Node n, String binding) {
         Binding b = new Binding(n, binding, Mode.ONEWAY);
         addBinding(n, b);
-        System.out.println(String.format("Setting one way binding for %s", b));
+        //System.out.println(String.format("Setting one way binding for %s", b));
     }
 
     public static void applyBinding(Node n, Object bean) {

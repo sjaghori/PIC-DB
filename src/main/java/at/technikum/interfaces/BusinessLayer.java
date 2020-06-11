@@ -107,18 +107,4 @@ public interface BusinessLayer {
 	 */
 	void writeIPTC(String filename, IPTCModel iptc) throws Exception;
 
-	/**
-	 * Returns a list of ALL Cameras.
-	 *
-	 * @return
-	 */
-	Collection<CameraModel> getCameras();
-
-	/**
-	 * Returns ONE Camera from the database.
-	 *
-	 * @param ID
-	 * @return
-	 */
-	CameraModel getCamera(int ID);
 }

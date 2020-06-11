@@ -40,9 +40,4 @@ public interface PicturePresentationModel {
 	 * The Photographer ViewModel
 	 */
 	PhotographerPresentationModel getPhotographer();
-
-	/**
-	 * The Camera ViewModel
-	 */
-	CameraPresentationModel getCamera();
 }

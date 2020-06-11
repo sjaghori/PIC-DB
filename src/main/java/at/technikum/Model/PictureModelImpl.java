@@ -1,6 +1,5 @@
 package at.technikum.Model;
 
-import at.technikum.interfaces.models.CameraModel;
 import at.technikum.interfaces.models.EXIFModel;
 import at.technikum.interfaces.models.IPTCModel;
 import at.technikum.interfaces.models.PictureModel;
@@ -11,7 +10,6 @@ public class PictureModelImpl implements PictureModel {
     private String filename;
     private IPTCModel iptcModel;
     private EXIFModel exifModel;
-    private CameraModel cameraModel;
     private String path;
 
     public PictureModelImpl(int id, String filename, String path) {
@@ -58,15 +56,5 @@ public class PictureModelImpl implements PictureModel {
     @Override
     public void setEXIF(EXIFModel value) {
         this.exifModel = value;
-    }
-
-    @Override
-    public CameraModel getCamera() {
-        return this.cameraModel;
-    }
-
-    @Override
-    public void setCamera(CameraModel value) {
-        this.cameraModel = value;
     }
 }

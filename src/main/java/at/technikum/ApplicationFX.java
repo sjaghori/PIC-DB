@@ -1,8 +1,5 @@
 package at.technikum;
 
-import at.technikum.Business.BusinessLayerImpl;
-import at.technikum.interfaces.BusinessLayer;
-import at.technikum.interfaces.models.PictureModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,15 +14,8 @@ public class ApplicationFX extends Application {
 
     private static final Logger logger = LogManager.getLogger(ApplicationFX.class);
 
-    public static void main(String[] args) throws Exception {
-
-        logger.info("Hello from Log4j 2");
-
-        BusinessLayer businessLayer = new BusinessLayerImpl();
-        PictureModel pictureModel = businessLayer.getPicture(2);
-
-        System.out.println("ID: " + pictureModel.getID() + " , name: "
-                + pictureModel.getFileName());
+    public static void main(String[] args) {
+        logger.info("Log4j2: launching application!");
 
         launch(args);
     }

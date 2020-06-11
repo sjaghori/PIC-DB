@@ -8,13 +8,7 @@ public interface IPTCModel {
 	void setKeywords(String value);
 
 	/**
-	 * Name of the photographer
-	 */
-	String getByLine();
-	void setByLine(String value);
-
-	/**
-	 * copyright noties.
+	 * copyright notices.
 	 */
 	String getCopyrightNotice();
 	void setCopyrightNotice(String value);
@@ -24,11 +18,5 @@ public interface IPTCModel {
 	 */
 	String getHeadline();
 	void setHeadline(String value);
-
-	/**
-	 * Caption/Abstract, a description of the picture
-	 */
-	String getCaption();
-	void setCaption(String value);
 
 }

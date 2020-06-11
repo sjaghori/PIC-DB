@@ -74,18 +74,4 @@ public interface DataAccessLayer {
 	 */
 	void deletePhotographer(int ID) throws Exception;
 
-	/**
-	 * Returns a list of ALL Cameras.
-	 *
-	 * @return
-     */
-	Collection<CameraModel> getCameras();
-
-    /**
-     * Returns ONE Camera
-     *
-     * @param ID
-     * @return
-     */
-    CameraModel getCamera(int ID);
 }

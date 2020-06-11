@@ -4,11 +4,9 @@ import at.technikum.interfaces.models.IPTCModel;
 
 public class IPTCModelImpl implements IPTCModel {
 
-    private String keywords;
-    private String byLine;
-    private String copyrightNotice;
-    private String headline;
-    private String caption;
+    private String keywords;                // a list of keywords/tags
+    private String copyrightNotice;         // copyright notices
+    private String headline;                // Summary/Headline of the picture
 
     @Override
     public String getKeywords() {
@@ -18,16 +16,6 @@ public class IPTCModelImpl implements IPTCModel {
     @Override
     public void setKeywords(String value) {
         this.keywords = value;
-    }
-
-    @Override
-    public String getByLine() {
-        return this.byLine;
-    }
-
-    @Override
-    public void setByLine(String value) {
-        this.byLine = value;
     }
 
     @Override
@@ -50,13 +38,4 @@ public class IPTCModelImpl implements IPTCModel {
         this.headline = value;
     }
 
-    @Override
-    public String getCaption() {
-        return this.caption;
-    }
-
-    @Override
-    public void setCaption(String value) {
-        this.caption = value;
-    }
 }

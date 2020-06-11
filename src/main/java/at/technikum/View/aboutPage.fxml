@@ -5,12 +5,10 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefWidth="600.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.View.MenuBarController">
-    <children>
-        <Label layoutX="248.0" layoutY="171.0" text="PicDB" textFill="RED">
-            <font>
-                <Font size="41.0"/>
-            </font>
-        </Label>
-    </children>
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.ApplicationFX">
+    <Label layoutX="248.0" layoutY="171.0" text="PicDB" textFill="RED">
+        <font>
+            <Font size="41.0"/>
+        </font>
+    </Label>
 </AnchorPane>

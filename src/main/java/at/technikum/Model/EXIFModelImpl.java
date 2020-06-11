@@ -6,14 +6,12 @@ import at.technikum.interfaces.models.EXIFModel;
 
 public class EXIFModelImpl implements EXIFModel {
 
-    private String cameraModel;
-    private String make;
-    private double fNumber;
-    private double exposureTime;
-    private double isoValue;
-    private float apertureNumber;
-    private Boolean flash;
-    private ExposurePrograms exposurePrograms;
+    private String make;                        // or Vendor, Manufacturer
+    private double fNumber;                     // f/1.4, f/2, f/2.8, f/4, f/5.6, f/8
+    private double exposureTime;                // in seconds e.g. 1/250 sec
+    private double isoValue;                    // e.g. 100, 200, 400, 800
+    private Boolean flash;                      // yes or no
+    private ExposurePrograms exposurePrograms;  // e.g. LandscapeMode, Normal
 
 
     @Override
@@ -58,7 +56,7 @@ public class EXIFModelImpl implements EXIFModel {
 
     @Override
     public boolean getFlash() {
-        return false;
+        return this.flash;
     }
 
     @Override

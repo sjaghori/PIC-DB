@@ -1,51 +1,45 @@
 package at.technikum.View;
 
+import at.technikum.PresentationModel.SearchPresentationModelImpl;
+import at.technikum.Utils.Binding;
+import at.technikum.Utils.Report;
 import at.technikum.interfaces.AbstractController;
+import at.technikum.interfaces.presentationmodels.SearchPresentationModel;
+import com.itextpdf.text.DocumentException;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class MenuBarController extends AbstractController {
 
     @FXML
-    public Button search_button;
-    public TextField search_field;
-
-    @FXML
+    public VBox searchView;
     public MenuBar helpmenu;
 
-    @FXML
-    public Menu help_bar;
+    SearchPresentationModel searchPresentationModel = new SearchPresentationModelImpl();
 
-    @FXML
-    void onSearchButtonClicked() {
-        String text = search_field.getText();
-        System.out.println("Searched for: " + text);
+    @Override
+    public void initialize(URL url, ResourceBundle resources) {
+        super.initialize(url, resources);
+
+        Binding.applyBinding(searchView, searchPresentationModel);
     }
 
     @FXML
-    public void onClickAboutPage() {
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("aboutPage.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("About");
-            Scene scene = new Scene(root, 600, 400);
-            stage.setScene(scene);
-            scene.getStylesheets().add(String.valueOf(getClass().getResource("../stylesheet.css")));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void onSearchButtonClicked() {
+        String text = searchPresentationModel.getSearchText();
+        System.out.println("Searched for: " + text);
     }
 
     @FXML
@@ -65,7 +59,7 @@ public class MenuBarController extends AbstractController {
         }
     }
 
-    public void onEditPhotographer(ActionEvent actionEvent) {
+    public void onEditPhotographer() {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("photographerList.fxml"));
@@ -73,10 +67,31 @@ public class MenuBarController extends AbstractController {
             stage.setTitle("Photographers List");
             Scene scene = new Scene(root, 400, 400);
             stage.setScene(scene);
-            scene.getStylesheets().add(String.valueOf(getClass().getResource("../stylesheet.css")));
+            scene.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void onClickAboutPage() {
+
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("aboutPage.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("About");
+            Scene scene = new Scene(root, 600, 400);
+            stage.setScene(scene);
+            //scene.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onCreateReport() throws IOException, DocumentException {
+        Report report = new Report();
+        report.createReport();
     }
 }

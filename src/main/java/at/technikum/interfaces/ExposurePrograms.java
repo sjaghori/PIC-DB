@@ -13,7 +13,7 @@ public enum ExposurePrograms {
 
 	private int value;
 
-	private ExposurePrograms(int value) {
+	ExposurePrograms(int value) {
 		this.value = value;
 	}
 

@@ -2,13 +2,16 @@ package at.technikum.DataAccessLayer;
 
 import at.technikum.Utils.Configurations;
 
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Database {
+
+    private static final Logger logger = LogManager.getLogger(Database.class);
 
     static Connection connection = null;
 
@@ -29,11 +32,14 @@ public class Database {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, passwd);
-            System.out.println("Connected to the Mysql server successfully.");
+            logger.info("Connected to the Mysql server successfully.");
 
+        } catch (ClassNotFoundException e) {
+            logger.error("Unable to load MySQL Driver: " + e.getMessage());
+        }
 
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Unable to connect to MySQL\n" + e.getMessage());
+        catch (SQLException e) {
+            logger.error("Unable to connect to MySQL: " + e.getMessage());
         }
         return connection;
     }

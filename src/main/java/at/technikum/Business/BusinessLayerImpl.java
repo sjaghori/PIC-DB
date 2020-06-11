@@ -80,14 +80,4 @@ public class BusinessLayerImpl implements BusinessLayer {
     @Override
     public void writeIPTC(String filename, IPTCModel iptc) throws Exception {
     }
-
-    @Override
-    public Collection<CameraModel> getCameras() {
-        return _dal.getCameras();
-    }
-
-    @Override
-    public CameraModel getCamera(int ID) {
-        return _dal.getCamera(ID);
-    }
 }

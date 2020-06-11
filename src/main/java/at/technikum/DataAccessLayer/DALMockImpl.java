@@ -50,14 +50,4 @@ public class DALMockImpl implements DataAccessLayer {
     public void deletePhotographer(int ID) throws Exception {
 
     }
-
-    @Override
-    public Collection<CameraModel> getCameras() {
-        return null;
-    }
-
-    @Override
-    public CameraModel getCamera(int ID) {
-        return null;
-    }
 }

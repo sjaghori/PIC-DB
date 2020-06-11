@@ -1,7 +1,5 @@
 package at.technikum.Utils;
 
-import at.technikum.ApplicationFX;
-import at.technikum.DataAccessLayer.Database;
 import org.apache.logging.log4j.LogManager;
 
 import java.io.BufferedReader;
@@ -11,11 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Configurations {
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(ApplicationFX.class);
+
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(Configurations.class);
 
     static Properties applicationProps = null;
 
@@ -23,7 +20,7 @@ public class Configurations {
 
         if (applicationProps != null) return applicationProps;
 
-        logger.debug("Inside Configurations.java");
+        //logger.debug("Inside Configurations.java");
 
         // create and load default properties Properties
         java.util.Properties defaultProps = new java.util.Properties();
@@ -33,7 +30,7 @@ public class Configurations {
             BufferedReader bf = Files.newBufferedReader(defaultPropsPath, StandardCharsets.UTF_8);
             defaultProps.load(bf);
         } catch (IOException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error("Unable to read default.properties file: " + ex.getMessage());
         }
 
         // create application properties with default
@@ -44,7 +41,7 @@ public class Configurations {
             BufferedReader bf = Files.newBufferedReader(applicationPropsPath, StandardCharsets.UTF_8);
             applicationProps.load(bf);
         } catch (IOException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error("Unable to read app.properties file: " + ex.getMessage());
         }
         return applicationProps;
     }
