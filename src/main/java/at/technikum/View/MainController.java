@@ -4,6 +4,7 @@ package at.technikum.View;
 import at.technikum.PresentationModel.MainWindowPresentationModelImpl;
 import at.technikum.Utils.Binding;
 import at.technikum.interfaces.AbstractController;
+import at.technikum.interfaces.models.PictureModel;
 import at.technikum.interfaces.presentationmodels.MainWindowPresentationModel;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -20,10 +21,9 @@ public class MainController extends AbstractController {
     public AnchorPane iptcView;
     public AnchorPane exifView;
 
-    MainWindowPresentationModel mainWindowPresentationModel = new MainWindowPresentationModelImpl();
+    MainWindowPresentationModel mainWindowPresentationModel = MainWindowPresentationModelImpl.getInstance();
 
-    public MainController() throws Exception {
-    }
+    PictureModel pictureModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resources) {
@@ -35,4 +35,17 @@ public class MainController extends AbstractController {
 
     public void onSaveChanges() {
     }
+
+    public void initData(int index) {
+
+    }
+
+    private static MainController instance = null;
+    public static MainController getInstance() throws Exception {
+        if (instance == null)
+            instance = new MainController();
+
+        return instance;
+    }
+
 }

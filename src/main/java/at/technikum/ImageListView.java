@@ -3,11 +3,11 @@ package at.technikum;
 import at.technikum.View.ImageListController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
-public class ImageListView extends AnchorPane {
+public class ImageListView extends StackPane {
 
     ImageListController controller;
 
@@ -19,12 +19,13 @@ public class ImageListView extends AnchorPane {
 
             controller = new ImageListController();
             loader.setController(controller);
-
             Node n = loader.load();
             this.getChildren().add(n);
 
         } catch (IOException exception) {
             throw new RuntimeException(exception);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

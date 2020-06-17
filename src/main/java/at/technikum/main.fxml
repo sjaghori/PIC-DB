@@ -8,81 +8,86 @@
 
 <?import at.technikum.ImageListView?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity"
-      fx:id="root" prefHeight="800" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.2-internal"
+<VBox fx:id="root" prefHeight="800" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.2-internal"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.View.MainController">
 
     <!--Menu Bar View-->
     <fx:include source="View/menuBarWindow.fxml"/>
 
-    <SplitPane dividerPositions="0.66" VBox.vgrow="ALWAYS">
-        <!--Image View-->
-        <AnchorPane fx:id="bigImageView" minWidth="-Infinity" prefWidth="300.0">
-            <ImageView fx:id="bigImage" Binding.twoWay="{image=image}" preserveRatio="true">
-            </ImageView>
-        </AnchorPane>
-        <TabPane minWidth="-Infinity" prefWidth="235.0" tabClosingPolicy="unavailable">
-            <!--IPTC TAB View-->
-            <Tab text="IPTC">
-                <AnchorPane fx:id="iptcView">
-                    <VBox spacing="5.0" AnchorPane.leftAnchor="0.0"
-                          AnchorPane.rightAnchor="0.0">
-                        <padding>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                        </padding>
-                        <Label text="Keywords/Tags"/>
-                        <TextField Binding.twoWay="{text=keywords}"/>
-                        <Label text="CopyrightNotice"/>
-                        <TextArea prefHeight="130.0" Binding.twoWay="{text=copyright}"/>
-                        <Label text="Summary/Headline of the picture"/>
-                        <TextArea prefHeight="130.0" Binding.twoWay="{text=headline}"/>
+    <SplitPane dividerPositions="0.66" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+        <VBox>
+            <SplitPane dividerPositions="0.75" VBox.vgrow="ALWAYS">
+                <!--Image View-->
+                <AnchorPane fx:id="bigImageView" minWidth="-Infinity" prefWidth="300.0">
+                    <ImageView fx:id="bigImage" Binding.twoWay="{image=image}" preserveRatio="true">
+                    </ImageView>
+                </AnchorPane>
+                <TabPane minWidth="-Infinity" prefWidth="235.0" tabClosingPolicy="unavailable">
+                    <!--IPTC TAB View-->
+                    <Tab text="IPTC">
+                        <AnchorPane fx:id="iptcView">
+                            <VBox spacing="5.0" AnchorPane.leftAnchor="0.0"
+                                  AnchorPane.rightAnchor="0.0">
+                                <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                </padding>
+                                <Label text="Keywords/Tags"/>
+                                <TextField Binding.twoWay="{text=keywords}"/>
+                                <Label text="CopyrightNotice"/>
+                                <TextArea prefHeight="130.0" Binding.twoWay="{text=copyright}"/>
+                                <Label text="Summary/Headline of the picture"/>
+                                <TextArea prefHeight="130.0" Binding.twoWay="{text=headline}"/>
 
-                        <Button text="Save Changes" fx:id="save_button_iptc"
-                                onMouseClicked="#onSaveChanges">
-                            <VBox.margin>
-                                <Insets top="10.0"/>
-                            </VBox.margin>
-                        </Button>
-                    </VBox>
-                </AnchorPane>
-            </Tab>
-            <!--EXIF TAB View-->
-            <Tab text="EXIF">
-                <AnchorPane fx:id="exifView">
-                    <VBox spacing="5.0" AnchorPane.leftAnchor="0.0"
-                          AnchorPane.rightAnchor="0.0">
-                        <padding>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                        </padding>
-                        <Label text="Make/Camera"/>
-                        <Label Binding.twoWay="{text=make}"/>
-                        <Label text="ExposureTime"/>
-                        <Label Binding.twoWay="{text=exposureTime}"/>
-                        <Label text="ISO Value"/>
-                        <Label Binding.twoWay="{text=isoValue}"/>
-                        <Label text="fNumber"/>
-                        <Label Binding.twoWay="{text=fNumber}"/>
-                        <Label text="Flash"/>
-                        <Label/>
-                        <Label text="Exposure Programs"/>
-                        <Label Binding.twoWay="{text=exposurePrograms}"/>
-                    </VBox>
-                </AnchorPane>
-            </Tab>
-            <!--PHOTOGRAPHER TAB View-->
-            <Tab text="PHOTOGRAPHER">
-                <AnchorPane>
-                    <VBox spacing="5.0" AnchorPane.leftAnchor="0.0"
-                          AnchorPane.rightAnchor="0.0">
-                        <padding>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                        </padding>
-                        <ChoiceBox prefWidth="Infinity" Binding.twoWay="{text=photographer}">
-                        </ChoiceBox>
-                    </VBox>
-                </AnchorPane>
-            </Tab>
-        </TabPane>
+                                <Button text="Save Changes" fx:id="save_button_iptc"
+                                        onMouseClicked="#onSaveChanges">
+                                    <VBox.margin>
+                                        <Insets top="10.0"/>
+                                    </VBox.margin>
+                                </Button>
+                            </VBox>
+                        </AnchorPane>
+                    </Tab>
+                    <!--EXIF TAB View-->
+                    <Tab text="EXIF">
+                        <AnchorPane fx:id="exifView">
+                            <VBox spacing="5.0" AnchorPane.leftAnchor="0.0"
+                                  AnchorPane.rightAnchor="0.0">
+                                <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                </padding>
+                                <Label text="Make/Camera"/>
+                                <Label Binding.twoWay="{text=make}"/>
+                                <Label text="ExposureTime"/>
+                                <Label Binding.twoWay="{text=exposureTime}"/>
+                                <Label text="ISO Value"/>
+                                <Label Binding.twoWay="{text=isoValue}"/>
+                                <Label text="fNumber"/>
+                                <Label Binding.twoWay="{text=fNumber}"/>
+                                <Label text="Flash"/>
+                                <Label/>
+                                <Label text="Exposure Programs"/>
+                                <Label Binding.twoWay="{text=exposurePrograms}"/>
+                            </VBox>
+                        </AnchorPane>
+                    </Tab>
+                    <!--PHOTOGRAPHER TAB View-->
+                    <Tab text="PHOTOGRAPHER">
+                        <AnchorPane>
+                            <VBox spacing="5.0" AnchorPane.leftAnchor="0.0"
+                                  AnchorPane.rightAnchor="0.0">
+                                <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                </padding>
+                                <ChoiceBox prefWidth="Infinity" Binding.twoWay="{text=photographer}">
+                                </ChoiceBox>
+                            </VBox>
+                        </AnchorPane>
+                    </Tab>
+                </TabPane>
+            </SplitPane>
+        </VBox>
+        <ImageListView/>
+        <!--<ListView fx:id="pictureListView" orientation="HORIZONTAL" prefHeight="250"></ListView>-->
     </SplitPane>
-    <ImageListView/>
+
 </VBox>

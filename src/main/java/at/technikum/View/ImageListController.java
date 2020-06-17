@@ -2,6 +2,7 @@ package at.technikum.View;
 
 import at.technikum.PresentationModel.MainWindowPresentationModelImpl;
 import at.technikum.interfaces.AbstractController;
+import at.technikum.interfaces.presentationmodels.MainWindowPresentationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 
@@ -18,21 +18,26 @@ import java.util.ResourceBundle;
 
 public class ImageListController extends AbstractController {
 
+    MainController mainController = MainController.getInstance();
+
     @FXML
     private ListView pictureListView;
 
     ObservableList list = FXCollections.observableArrayList();
 
+    MainWindowPresentationModel main;
+
+    public ImageListController() throws Exception {
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
-        list = new MainWindowPresentationModelImpl().getList().getpics();
-
-
+        main = MainWindowPresentationModelImpl.getInstance();
+        list = main.getList().getpics();
 
         pictureListView.getItems().addAll(list);
-
 
         pictureListView.setCellFactory(new Callback<ListView, ListCell>() {
             private ImageView imageView = new ImageView();
@@ -65,9 +70,13 @@ public class ImageListController extends AbstractController {
         });
     }
 
-    public void selectImage(MouseEvent mouseEvent) {
+    public void selectImage() {
         ImageView selectedImage = (ImageView) pictureListView.getSelectionModel().getSelectedItem();
         int selectedIndex = pictureListView.getItems().indexOf(selectedImage);
+        if (selectedIndex == -1) {
+            selectedIndex = 1;
+        }
         System.out.println(selectedIndex);
+        mainController.initData(selectedIndex);
     }
 }

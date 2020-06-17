@@ -90,7 +90,7 @@ public class MenuBarController extends AbstractController {
         }
     }
 
-    public void onCreateReport() throws IOException, DocumentException {
+    public void onCreateReport() {
         Report report = new Report();
         report.createReport();
     }
