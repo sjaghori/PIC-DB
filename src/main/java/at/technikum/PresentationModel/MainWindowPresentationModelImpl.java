@@ -1,5 +1,7 @@
 package at.technikum.PresentationModel;
 
+import at.technikum.Business.BusinessLayerImpl;
+import at.technikum.interfaces.BusinessLayer;
 import at.technikum.interfaces.presentationmodels.MainWindowPresentationModel;
 import at.technikum.interfaces.presentationmodels.PictureListPresentationModel;
 import at.technikum.interfaces.presentationmodels.PicturePresentationModel;
@@ -10,14 +12,22 @@ import org.apache.logging.log4j.Logger;
 public class MainWindowPresentationModelImpl implements MainWindowPresentationModel {
     private static final Logger logger = LogManager.getLogger(MainWindowPresentationModelImpl.class);
 
-    // DATABASE private PictureServiceMock ps = PictureServiceMock.getInstance();
-    private int selectedIndex = 0;
+
+    private BusinessLayer dal = BusinessLayerImpl.getInstance();
 
     // Children View Models
     private PicturePresentationModel picturePresentationModel = new PicturePresentationModelImpl();
-    private PictureListPresentationModel pictureListPresentationModel = new PictureListPresentationModelImpl();
-    private SearchPresentationModel searchPresentationModel = new SearchPresentationModelImpl();
+    private PictureListPresentationModel pictureListPresentationModel;
 
+    {
+        try {
+            pictureListPresentationModel = new PictureListPresentationModelImpl(dal.getPictures());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private SearchPresentationModel searchPresentationModel = new SearchPresentationModelImpl();
 
     @Override
     public PicturePresentationModel getCurrentPicture() {

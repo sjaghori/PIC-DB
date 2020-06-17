@@ -19,7 +19,7 @@ public class ReflectionHelper {
             final Method prop = c.getMethod("get" + propName);
             return (E) prop.invoke(obj);
         } catch (NoSuchMethodException | IllegalAccessException
-                | IllegalArgumentException | InvocationTargetException e) {
+                | IllegalArgumentException | InvocationTargetException ignored) {
         }
 
         return null;

@@ -17,15 +17,23 @@ public class PhotographerPresentationModelImpl implements PhotographerPresentati
     private BooleanBinding incorrectBirthday;
 
     private PhotographerModel photographerModel;
+    private LocalDate today;
 
-    public PhotographerPresentationModelImpl() {
-        //super();
 
-    }
-
-    PhotographerPresentationModelImpl(PhotographerModel photographer) {
-        this();
+    public PhotographerPresentationModelImpl(PhotographerModel photographer) {
         refresh(photographer);
+
+        birthday.addListener((s,o,n) -> incorrectBirthday.invalidate());
+        incorrectBirthday = new BooleanBinding() {
+            @Override
+            protected boolean computeValue() {
+                today = LocalDate.now();
+                if (birthday.get() != null)
+                    return !isValidBirthDay();
+                else
+                    return false;
+            }
+        };
     }
 
 
@@ -37,7 +45,13 @@ public class PhotographerPresentationModelImpl implements PhotographerPresentati
         notes.setValue(photographer.getNotes());
     }
 
-    public void updateModel() {
+    @Override
+    public PhotographerModel getPhotographerModel() {
+        return this.photographerModel;
+    }
+
+    @Override
+    public void update() {
         photographerModel.setFirstName(this.getFirstName());
         photographerModel.setLastName(this.getLastName());
         photographerModel.setBirthDay(birthday.get());
@@ -105,32 +119,23 @@ public class PhotographerPresentationModelImpl implements PhotographerPresentati
         this.notes.set(value);
     }
 
-    @Override
-    public int getNumberOfPictures() {
-        return 0;
-    }
-
     public BooleanBinding cannotSaveProperty() {
         return Bindings.or(lastName.isEmpty(), incorrectBirthday);
     }
 
     @Override
     public boolean isValid() {
-        return false;
-    }
-
-    @Override
-    public String getValidationSummary() {
-        return null;
+        return isValidLastName() || isValidBirthDay();
     }
 
     @Override
     public boolean isValidLastName() {
-        return false;
+        return !getLastName().isEmpty();
     }
 
     @Override
     public boolean isValidBirthDay() {
-        return false;
+        return !(birthday.get().isAfter(today) || birthday.get().isEqual(today));
     }
+
 }

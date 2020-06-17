@@ -45,7 +45,7 @@
 }
 
 .tab-pane {
-    -fx-tab-min-width:80px;
+    -fx-tab-min-width:40px;
 }
 
 .tab {

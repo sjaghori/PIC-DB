@@ -8,7 +8,7 @@ public class PicturePresentationModelImpl implements PicturePresentationModel {
     PictureModel pictureModel = new PictureModelImpl(1, "","");
     IPTCPresentationModel iptcPresentationModel = new IPTCPresentationModelImpl();
     EXIFPresentationModel exifPresentationModel = new EXIFPresentationModelImpl();
-    PhotographerPresentationModel photographerPresentationModel = new PhotographerPresentationModelImpl();
+    //PhotographerPresentationModel photographerPresentationModel = new PhotographerPresentationModelImpl();
 
     // TODO: Bin mir da noch nicht sicher
     @Override
@@ -47,6 +47,7 @@ public class PicturePresentationModelImpl implements PicturePresentationModel {
 
     @Override
     public PhotographerPresentationModel getPhotographer() {
-        return this.photographerPresentationModel;
+        //return this.photographerPresentationModel;
+        return null;
     }
 }

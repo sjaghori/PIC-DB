@@ -6,6 +6,7 @@ import at.technikum.interfaces.DataAccessLayer;
 import at.technikum.interfaces.models.*;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class DALImpl implements DataAccessLayer {
+    private static DALImpl instance = new DALImpl(Database.getConnection());
 
     private static final Logger logger = LogManager.getLogger(DALImpl.class);
 
@@ -22,19 +24,28 @@ public class DALImpl implements DataAccessLayer {
         this.connection = connection;
     }
 
+
+    public static DALImpl getInstance() {
+        return instance;
+    }
+
     @Override
     public Collection<PictureModel> getPictures() {
         String query = "select * from picture";
+        List<PictureModel> pictureList = new ArrayList<>();
+        PictureModel pictureModel = null;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-
+                pictureModel = new PictureModelImpl(resultSet.getInt("id"),
+                        resultSet.getString("name"), resultSet.getString("pic_path"));
+                pictureList.add(pictureModel);
             }
         } catch (SQLException e) {
             logger.error("SQLException: " + e.toString());
         }
-        return null;
+        return pictureList;
     }
 
     @Override
@@ -45,6 +56,7 @@ public class DALImpl implements DataAccessLayer {
 
     @Override
     public PictureModel getPicture(int ID) {
+        // TODO: JOIN IPTC, EXIF
         String query = "select id, name, pic_path from Picture where id=?";
         PictureModel pictureModel = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -99,15 +111,11 @@ public class DALImpl implements DataAccessLayer {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 PhotographerModel photographer = new PhotographerModelImpl();
-                photographer.setID(resultSet.getInt("id"));
-                photographer.setFirstName(resultSet.getString("firstname"));
-                photographer.setLastName(resultSet.getString("lastname"));
-                photographer.setBirthDay(resultSet.getDate("birthdate").toLocalDate());
-                photographer.setNotes(resultSet.getString("notes"));
+                createPhotographer(resultSet, photographer);
                 photographerList.add(photographer);
             }
         } catch (SQLException e) {
-            logger.error("SQLException: " + e.toString());
+            logger.error("SQLException Here: " + e.toString());
         }
         return photographerList;
     }
@@ -119,13 +127,10 @@ public class DALImpl implements DataAccessLayer {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, ID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            photographer.setID(resultSet.getInt("id"));
-            photographer.setFirstName(resultSet.getString("firstname"));
-            photographer.setLastName(resultSet.getString("lastname"));
-            photographer.setBirthDay(resultSet.getDate("birthdate").toLocalDate());
-            photographer.setNotes(resultSet.getString("notes"));
+            resultSet.next();
+            createPhotographer(resultSet, photographer);
         } catch (SQLException e) {
-            logger.error("SQLException: " + e.toString());
+            logger.error("SQLException getPhotographer: " + e.toString());
         }
         return photographer;
     }
@@ -137,7 +142,12 @@ public class DALImpl implements DataAccessLayer {
             preparedStatement.setString(1, photographer.getFirstName());
             preparedStatement.setString(2, photographer.getLastName());
             preparedStatement.setString(3, photographer.getNotes());
-            preparedStatement.setDate(3, Date.valueOf(photographer.getBirthDay()));
+            if (photographer.getBirthDay() != null) {
+                preparedStatement.setDate(3, Date.valueOf(photographer.getBirthDay()));
+            } else {
+                preparedStatement.setDate(3, null);
+            }
+            
             preparedStatement.executeUpdate();
             // connection.commit();
         } catch (SQLException e) {
@@ -156,4 +166,36 @@ public class DALImpl implements DataAccessLayer {
             logger.error("SQLException: " + e.toString());
         }
     }
+
+    @Override
+    public void updatePhotographer(PhotographerModel photographer, int index) {
+        String query = "update photographer set firstname = ?, lastname = ?, birthdate = ?, notes = ? where id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, photographer.getFirstName());
+            preparedStatement.setString(2, photographer.getLastName());
+            preparedStatement.setDate(3, Date.valueOf(photographer.getBirthDay()));
+            preparedStatement.setString(4, photographer.getNotes());
+            preparedStatement.setInt(5, index);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error("SQLException updatePhotographer: " + e.toString());
+        }
+    }
+
+    private void createPhotographer(ResultSet resultSet, PhotographerModel photographer) throws SQLException {
+        photographer.setID(resultSet.getInt("id"));
+        photographer.setFirstName(resultSet.getString("firstname"));
+        photographer.setLastName(resultSet.getString("lastname"));
+
+        Date birthday = resultSet.getDate("birthdate");
+        if (birthday != null) {
+            LocalDate localDate = birthday.toLocalDate();
+            photographer.setBirthDay(localDate);
+        } else {
+            photographer.setBirthDay(null);
+        }
+
+        photographer.setNotes(resultSet.getString("notes"));
+    }
+
 }

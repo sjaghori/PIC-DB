@@ -1,8 +1,17 @@
 package at.technikum.interfaces.presentationmodels;
 
+import at.technikum.interfaces.models.PhotographerModel;
+
 import java.time.LocalDate;
 
 public interface PhotographerPresentationModel {
+
+	void refresh(PhotographerModel photographerModel);
+
+	void update();
+
+	public PhotographerModel getPhotographerModel();
+
 	/**
 	 * Database primary key
 	 */
@@ -35,22 +44,11 @@ public interface PhotographerPresentationModel {
 	String getNotes();
 
 	void setNotes(String value);
-	
-    /*
-     * Returns the number of Pictures
-     */
-    int getNumberOfPictures();
-
 
 	/**
 	 * Returns true, if the model is valid
 	 */
 	boolean isValid();
-
-	/**
-	 * Returns a summary of validation errors
-	 */
-	String getValidationSummary();
 
 	/**
 	 * returns true if the last name is valid

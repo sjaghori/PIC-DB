@@ -40,7 +40,7 @@ public class SearchPresentationModelImpl implements SearchPresentationModel {
 
     @Override
     public boolean getIsActive() {
-        return false;
+        return activeSearch.get();
     }
 
     @Override

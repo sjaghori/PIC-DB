@@ -1,7 +1,5 @@
 package at.technikum.interfaces.presentationmodels;
 
-import at.technikum.interfaces.ISORatings;
-
 public interface EXIFPresentationModel {
 	/**
 	 * Name of camera
@@ -37,23 +35,4 @@ public interface EXIFPresentationModel {
 	 * The Exposure Program as image resource
 	 */
 	String getExposureProgramResource();
-
-	/**
-	 * Gets or sets a optional camera presentation model
-	 * @return
-     */
-	CameraPresentationModel getCamera();
-	void setCamera(CameraPresentationModel value);
-
-	/**
-	 * Returns a ISO rating if a camera is set.
-	 * @return
-     */
-	ISORatings getISORating();
-
-	/**
-	 * Returns a image resource of a ISO rating if a camera is set.
-	 * @return
-     */
-	String getISORatingResource();
 }

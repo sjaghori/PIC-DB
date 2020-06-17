@@ -11,7 +11,7 @@ public interface DataAccessLayer {
 	 *
 	 * @return
 	 */
-	Collection<PictureModel> getPictures() throws Exception;
+	Collection<PictureModel> getPictures();
 	/**
 	 * Returns a filterd list of Pictures from the directory, based on a
 	 * database query.
@@ -28,28 +28,28 @@ public interface DataAccessLayer {
 	 * @param ID
 	 * @return
 	 */
-	PictureModel getPicture(int ID) throws Exception;
+	PictureModel getPicture(int ID);
 
 	/**
 	 * Saves all changes to the database.
 	 * 
 	 * @param picture
 	 */
-	void save(PictureModel picture) throws Exception;
+	void save(PictureModel picture);
 
 	/**
 	 * Deletes a Picture from the database.
 	 * 
 	 * @param ID
 	 */
-	void deletePicture(int ID) throws Exception;
+	void deletePicture(int ID);
 
 	/**
 	 * Returns a list of ALL Photographers.
 	 * 
 	 * @return
 	 */
-	Collection<PhotographerModel> getPhotographers() throws Exception;
+	Collection<PhotographerModel> getPhotographers();
 
 	/**
 	 * Returns ONE Photographer
@@ -57,14 +57,14 @@ public interface DataAccessLayer {
 	 * @param ID
 	 * @return
 	 */
-	PhotographerModel getPhotographer(int ID) throws Exception;
+	PhotographerModel getPhotographer(int ID);
 
 	/**
 	 * Saves all changes.
 	 * 
 	 * @param photographer
 	 */
-	void save(PhotographerModel photographer) throws Exception;
+	void save(PhotographerModel photographer);
 
 	/**
 	 * Deletes a Photographer. A Exception is thrown if a Photographer is still
@@ -72,6 +72,15 @@ public interface DataAccessLayer {
 	 * 
 	 * @param ID
 	 */
-	void deletePhotographer(int ID) throws Exception;
+	void deletePhotographer(int ID);
+
+	/**
+	 * Updates a Photographer.
+	 *
+	 *
+	 * @param photographer
+	 * @param index
+	 */
+	void updatePhotographer(PhotographerModel photographer, int index);
 
 }

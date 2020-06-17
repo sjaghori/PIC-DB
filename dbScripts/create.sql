@@ -46,3 +46,7 @@ commit;
 
 DROP DATABASE picdb;
 
+SELECT * FROM picture
+JOIN iptc on picture.id = iptc.fk_picture_id
+JOIN photographer p on picture.fk_photographer = p.id
+WHERE keywords like "%geo%" or lastname like "geo";

@@ -11,7 +11,7 @@ public interface BusinessLayer {
 	 * 
 	 * @return
 	 */
-	Collection<PictureModel> getPictures() throws Exception;
+	Collection<PictureModel> getPictures();
 
 	/**
 	 * Returns a filterd list of Pictures from the directory, based on a
@@ -29,33 +29,33 @@ public interface BusinessLayer {
 	 * @param ID
 	 * @return
 	 */
-	PictureModel getPicture(int ID) throws Exception;
+	PictureModel getPicture(int ID);
 
 	/**
 	 * Saves all changes to the database.
 	 * 
 	 * @param picture
 	 */
-	void save(PictureModel picture) throws Exception;
+	void save(PictureModel picture);
 
 	/**
 	 * Deletes a Picture from the database AND from the file system.
 	 * 
 	 * @param ID
 	 */
-	void deletePicture(int ID) throws Exception;
+	void deletePicture(int ID);
 
 	/**
 	 * Syncs the picture folder with the database.
 	 */
-	void sync() throws Exception;
+	void sync();
 
 	/**
 	 * Returns a list of ALL Photographers.
 	 * 
 	 * @return
 	 */
-	Collection<PhotographerModel> getPhotographers() throws Exception;
+	Collection<PhotographerModel> getPhotographers();
 
 	/**
 	 * Returns ONE Photographer
@@ -63,14 +63,14 @@ public interface BusinessLayer {
 	 * @param ID
 	 * @return
 	 */
-	PhotographerModel getPhotographer(int ID) throws Exception;
+	PhotographerModel getPhotographer(int ID);
 
 	/**
 	 * Saves all changes.
 	 * 
 	 * @param photographer
 	 */
-	void save(PhotographerModel photographer) throws Exception;
+	void save(PhotographerModel photographer);
 
 	/**
 	 * Deletes a Photographer. A Exception is thrown if a Photographer is still
@@ -78,7 +78,17 @@ public interface BusinessLayer {
 	 * 
 	 * @param ID
 	 */
-	void deletePhotographer(int ID) throws Exception;
+	void deletePhotographer(int ID);
+
+	/**
+	 * Updates a Photographer.
+	 *
+	 *
+	 * @param photographer
+	 * @param index
+	 */
+	void updatePhotographer(PhotographerModel photographer, int index);
+
 
 	/**
 	 * Extracts IPTC information from a picture. NOTE: You may simulate the
@@ -87,7 +97,7 @@ public interface BusinessLayer {
 	 * @param filename
 	 * @return
 	 */
-	IPTCModel extractIPTC(String filename) throws Exception;
+	IPTCModel extractIPTC(String filename);
 
 	/**
 	 * Extracts EXIF information from a picture. NOTE: You may simulate the
@@ -96,7 +106,7 @@ public interface BusinessLayer {
 	 * @param filename
 	 * @return
 	 */
-	EXIFModel extractEXIF(String filename) throws Exception;
+	EXIFModel extractEXIF(String filename);
 
 	/**
 	 * Writes IPTC information back to a picture. NOTE: You may simulate the
@@ -105,6 +115,6 @@ public interface BusinessLayer {
 	 * @param filename
 	 * @param iptc
 	 */
-	void writeIPTC(String filename, IPTCModel iptc) throws Exception;
+	void writeIPTC(String filename, IPTCModel iptc);
 
 }
