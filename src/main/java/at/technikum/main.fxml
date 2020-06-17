@@ -14,11 +14,11 @@
     <!--Menu Bar View-->
     <fx:include source="View/menuBarWindow.fxml"/>
 
-    <SplitPane dividerPositions="0.66" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.3" orientation="VERTICAL" VBox.vgrow="ALWAYS">
         <VBox>
-            <SplitPane dividerPositions="0.75" VBox.vgrow="ALWAYS">
+            <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
                 <!--Image View-->
-                <AnchorPane fx:id="bigImageView" minWidth="-Infinity" prefWidth="300.0">
+                <AnchorPane fx:id="bigImageContainer" minWidth="-Infinity" prefWidth="300.0">
                     <ImageView fx:id="bigImage" Binding.twoWay="{image=image}" preserveRatio="true">
                     </ImageView>
                 </AnchorPane>
@@ -86,8 +86,8 @@
                 </TabPane>
             </SplitPane>
         </VBox>
+        <!--Custom UI Control-->
         <ImageListView/>
-        <!--<ListView fx:id="pictureListView" orientation="HORIZONTAL" prefHeight="250"></ListView>-->
     </SplitPane>
 
 </VBox>

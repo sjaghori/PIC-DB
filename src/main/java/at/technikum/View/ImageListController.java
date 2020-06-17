@@ -73,10 +73,10 @@ public class ImageListController extends AbstractController {
     public void selectImage() {
         ImageView selectedImage = (ImageView) pictureListView.getSelectionModel().getSelectedItem();
         int selectedIndex = pictureListView.getItems().indexOf(selectedImage);
+        selectedIndex += 1;
         if (selectedIndex == -1) {
-            selectedIndex = 1;
+            selectedIndex = 0;
         }
-        System.out.println(selectedIndex);
-        mainController.initData(selectedIndex);
+        main.selectPicture(selectedIndex);
     }
 }

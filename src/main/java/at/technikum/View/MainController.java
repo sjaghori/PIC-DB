@@ -7,6 +7,7 @@ import at.technikum.interfaces.AbstractController;
 import at.technikum.interfaces.models.PictureModel;
 import at.technikum.interfaces.presentationmodels.MainWindowPresentationModel;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +21,8 @@ public class MainController extends AbstractController {
     @FXML
     public AnchorPane iptcView;
     public AnchorPane exifView;
+    public AnchorPane bigImageContainer;
+    public ImageView bigImage;
 
     MainWindowPresentationModel mainWindowPresentationModel = MainWindowPresentationModelImpl.getInstance();
 
@@ -29,8 +32,12 @@ public class MainController extends AbstractController {
     public void initialize(URL url, ResourceBundle resources) {
         super.initialize(url, resources);
 
-        Binding.applyBinding(iptcView, mainWindowPresentationModel.getCurrentPicture().getIPTC());
-        Binding.applyBinding(exifView, mainWindowPresentationModel.getCurrentPicture().getEXIF());
+        bigImage.fitWidthProperty().bind(bigImageContainer.widthProperty());
+        bigImage.fitHeightProperty().bind(bigImageContainer.heightProperty());
+
+        Binding.applyBinding(bigImage, mainWindowPresentationModel.getCurrentPicture());
+        //Binding.applyBinding(iptcView, mainWindowPresentationModel.getCurrentPicture().getIPTC());
+        //Binding.applyBinding(exifView, mainWindowPresentationModel.getCurrentPicture().getEXIF());
     }
 
     public void onSaveChanges() {

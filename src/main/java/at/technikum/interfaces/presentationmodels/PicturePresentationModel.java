@@ -1,5 +1,6 @@
 package at.technikum.interfaces.presentationmodels;
 
+import at.technikum.interfaces.models.PictureModel;
 import at.technikum.interfaces.presentationmodels.EXIFPresentationModel;
 import at.technikum.interfaces.presentationmodels.IPTCPresentationModel;
 import at.technikum.interfaces.presentationmodels.PhotographerPresentationModel;
@@ -40,4 +41,16 @@ public interface PicturePresentationModel {
 	 * The Photographer ViewModel
 	 */
 	PhotographerPresentationModel getPhotographer();
+
+	/**
+	 * Refreshes the ViewModel
+	 */
+	void refresh(PictureModel pic);
+
+
+	/**
+	 * gets the current PictureModel
+	 */
+	PictureModel getUpdatedModel();
+
 }

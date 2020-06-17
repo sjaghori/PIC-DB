@@ -23,7 +23,7 @@ public class MainWindowPresentationModelImpl implements MainWindowPresentationMo
     }
 
     // Presentation Models
-    private PicturePresentationModel picturePresentationModel = new PicturePresentationModelImpl();
+    private PicturePresentationModel picturePresentationModel = new PicturePresentationModelImpl(dal.getPicture(selectedIndex));
     private PictureListPresentationModel pictureListPresentationModel = new PictureListPresentationModelImpl(dal.getPictures());
     private SearchPresentationModel searchPresentationModel = new SearchPresentationModelImpl();
 
@@ -42,21 +42,21 @@ public class MainWindowPresentationModelImpl implements MainWindowPresentationMo
         return this.searchPresentationModel;
     }
 
-    /*
+    @Override
     public void selectPicture(int selectedIndex) {
-        if(selectedIndex != -1) {
+        /*if(selectedIndex != -1) {
             if (activeSearch.get()) {
-                String searchText = searchViewModel.searchTextProperty().get();
-                PictureModel pictureModel = ps.getPictureOfSearchResult(searchText, selectedIndex);
-                pictureViewModel.refresh(pictureModel);
-                logger.info("Selected image in search results with index: " + selectedIndex);
-            } else {
-                pictureViewModel.refresh(ps.getPicture(selectedIndex));
-                logger.info("Selected image with index: " + selectedIndex);
-            }
+                String searchText = searchViewModel.searchTextProperty().get();*/
+                //PictureModel pictureModel = ps.getPictureOfSearchResult(searchText, selectedIndex);
+                //pictureViewModel.refresh(pictureModel);
+                //logger.info("Selected image in search results with index: " + selectedIndex);
+            //} else {
+                picturePresentationModel.refresh(dal.getPicture(selectedIndex));
+                //logger.info("Selected image with index: " + selectedIndex);
+            //}
             this.selectedIndex = selectedIndex;
         }
-    }*/
+    //}
 
     /*
     public void loadAllPictures() {

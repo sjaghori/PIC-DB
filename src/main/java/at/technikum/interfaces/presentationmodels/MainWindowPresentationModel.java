@@ -20,4 +20,6 @@ public interface MainWindowPresentationModel {
 	 */
 	SearchPresentationModel getSearch();
 
+	void selectPicture(int selectedIndex);
+
 }
