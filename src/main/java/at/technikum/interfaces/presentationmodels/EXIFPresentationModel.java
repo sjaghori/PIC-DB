@@ -1,6 +1,11 @@
 package at.technikum.interfaces.presentationmodels;
 
+import at.technikum.interfaces.models.EXIFModel;
+
 public interface EXIFPresentationModel {
+
+	void refresh(EXIFModel exifModel);
+
 	/**
 	 * Name of camera
 	 */

@@ -1,10 +1,6 @@
 package at.technikum.View;
 
-import at.technikum.Business.BusinessLayerImpl;
-import at.technikum.Model.PhotographerModelImpl;
-import at.technikum.PresentationModel.PhotographerListPresentationModelImpl;
 import at.technikum.PresentationModel.PhotographerManagerPresentationModel;
-import at.technikum.PresentationModel.PhotographerPresentationModelImpl;
 import at.technikum.Utils.Binding;
 import at.technikum.interfaces.AbstractController;
 import at.technikum.interfaces.models.PhotographerModel;
@@ -62,9 +58,12 @@ public class PhotographerListController extends AbstractController {
                         if (item == null || empty) {
                             // No action to perform
                         } else {
-                            name = item.getFirstName() + ", " + item.getLastName();
+                            if (item.getFirstName() == null){
+                                name = item.getLastName();
+                            } else {
+                                name = item.getFirstName() + ", " + item.getLastName();
+                            }
                         }
-
                         this.setText(name);
                         this.setGraphic(null);
                     }

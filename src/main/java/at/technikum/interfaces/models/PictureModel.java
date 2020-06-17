@@ -27,4 +27,10 @@ public interface PictureModel {
 	 */
 	EXIFModel getEXIF();
 	void setEXIF(EXIFModel value);
+
+	/**
+	 * Photographer information
+	 */
+	PhotographerModel getPhotographer();
+	void setPhotographer(PhotographerModel photographer);
 }

@@ -2,6 +2,7 @@ package at.technikum.PresentationModel;
 
 import at.technikum.Business.BusinessLayerImpl;
 import at.technikum.interfaces.BusinessLayer;
+import at.technikum.interfaces.models.PictureModel;
 import at.technikum.interfaces.presentationmodels.MainWindowPresentationModel;
 import at.technikum.interfaces.presentationmodels.PictureListPresentationModel;
 import at.technikum.interfaces.presentationmodels.PicturePresentationModel;
@@ -57,6 +58,14 @@ public class MainWindowPresentationModelImpl implements MainWindowPresentationMo
             this.selectedIndex = selectedIndex;
         }
     //}
+
+    public void saveChanges() {
+        PictureModel pic = picturePresentationModel.getUpdatedModel();
+        dal.updatePicture(pic);
+        picturePresentationModel.refresh(pic);
+    }
+
+
 
     /*
     public void loadAllPictures() {

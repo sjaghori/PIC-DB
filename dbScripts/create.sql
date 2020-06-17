@@ -4,7 +4,7 @@ USE picdb;
 CREATE TABLE IF NOT EXISTS photographer
 (
     id        INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    firstname VARCHAR(100) NOT NULL,
+    firstname VARCHAR(100),
     lastname  VARCHAR(50)  NOT NULL,
     notes     TEXT,
     birthdate DATE
@@ -50,3 +50,12 @@ SELECT * FROM picture
 JOIN iptc on picture.id = iptc.fk_picture_id
 JOIN photographer p on picture.fk_photographer = p.id
 WHERE keywords like "%%" or lastname like "";
+
+select * from picture JOIN iptc i on picture.id = i.fk_picture_id JOIN exif e on picture.id = e.fk_picture_id JOIN photographer p on picture.fk_photographer = p.id where picture.id = 1;
+
+
+select * from picture JOIN iptc i on picture.id = i.fk_picture_id JOIN exif e on picture.id = e.fk_picture_id JOIN photographer p on picture.fk_photographer = p.id
+
+select * from iptc join picture p on iptc.fk_picture_id = p.id where p.name = 'parrot.jpg';
+
+update iptc join picture p on iptc.fk_picture_id = p.id set keywords = ?, copyrightNotice = ? , headline = ? where p.name = ?

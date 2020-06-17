@@ -2,6 +2,7 @@ package at.technikum.Model;
 
 import at.technikum.interfaces.models.EXIFModel;
 import at.technikum.interfaces.models.IPTCModel;
+import at.technikum.interfaces.models.PhotographerModel;
 import at.technikum.interfaces.models.PictureModel;
 
 public class PictureModelImpl implements PictureModel {
@@ -11,11 +12,15 @@ public class PictureModelImpl implements PictureModel {
     private IPTCModel iptcModel;
     private EXIFModel exifModel;
     private String path;
+    private PhotographerModel photographer;
 
     public PictureModelImpl(int id, String filename, String path) {
         this.id = id;
         this.filename = filename;
         this.path = path;
+        photographer = new PhotographerModelImpl();
+        iptcModel = new IPTCModelImpl();
+        exifModel = new EXIFModelImpl();
     }
 
     @Override
@@ -45,7 +50,9 @@ public class PictureModelImpl implements PictureModel {
 
     @Override
     public void setIPTC(IPTCModel value) {
-        this.iptcModel = value;
+        if (this.iptcModel != null) {
+            this.iptcModel = value;
+        }
     }
 
     @Override
@@ -55,6 +62,19 @@ public class PictureModelImpl implements PictureModel {
 
     @Override
     public void setEXIF(EXIFModel value) {
-        this.exifModel = value;
+        if (this.exifModel != null) {
+            this.exifModel = value;
+        }
+    }
+
+    @Override
+    public PhotographerModel getPhotographer() {
+        return this.photographer;
+    }
+
+    @Override
+    public void setPhotographer(PhotographerModel photographer) {
+        if (photographer != null)
+            this.photographer = photographer;
     }
 }

@@ -1,8 +1,15 @@
 package at.technikum.interfaces.presentationmodels;
 
+import at.technikum.interfaces.models.IPTCModel;
+
 import java.util.Collection;
 
 public interface IPTCPresentationModel {
+
+	void refresh(IPTCModel iptcModel);
+
+	void saveChanges(IPTCModel iptcModel);
+
 	/**
 	 * A list of keywords
 	 */

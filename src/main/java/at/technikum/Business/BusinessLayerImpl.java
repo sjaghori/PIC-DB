@@ -42,6 +42,11 @@ public class BusinessLayerImpl implements BusinessLayer {
     }
 
     @Override
+    public void updatePicture(PictureModel picture){
+        _dal.updatePicture(picture);
+    }
+
+    @Override
     public void save(PictureModel picture){
         _dal.save(picture);
     }

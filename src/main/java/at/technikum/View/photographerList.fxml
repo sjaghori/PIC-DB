@@ -21,7 +21,7 @@
         <DatePicker Binding.twoWay="{value=birthday}"/>
         <Label text="Notes"/>
         <TextArea wrapText="true" Binding.twoWay="{text=notes}"/>
-        <Button fx:id="save_button_photographer" mnemonicParsing="false" onMouseClicked="#savePhotographer" text="Save"
+        <Button mnemonicParsing="false" onMouseClicked="#savePhotographer" text="Save"
                 Binding.oneWay="{disable=cannotSave}"/>
     </VBox>
     <ListView fx:id="photographerListView" onMouseClicked="#selectPhotographer" prefWidth="150.0"/>

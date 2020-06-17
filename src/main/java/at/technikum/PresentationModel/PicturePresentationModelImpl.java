@@ -15,7 +15,6 @@ public class PicturePresentationModelImpl implements PicturePresentationModel {
 
     private ObjectProperty<Image> image = new SimpleObjectProperty<>();
 
-
     PictureModel pictureModel;
     IPTCPresentationModel iptcPresentationModel;
     EXIFPresentationModel exifPresentationModel;
@@ -23,18 +22,18 @@ public class PicturePresentationModelImpl implements PicturePresentationModel {
 
     PicturePresentationModelImpl(PictureModel pictureModel) {
         this.pictureModel = pictureModel;
-        //iptcPresentationModel = new IPTCPresentationModelImpl(pictureModel.getIPTC());
-        //exifPresentationModel = new EXIFPresentationModelImpl(pictureModel.getEXIF());
-        // photographerPresentationModel
+        iptcPresentationModel = new IPTCPresentationModelImpl(pictureModel.getIPTC());
+        exifPresentationModel = new EXIFPresentationModelImpl(pictureModel.getEXIF());
+        photographerPresentationModel = new PhotographerPresentationModelImpl(pictureModel.getPhotographer());
         loadImage(pictureModel);
     }
 
     @Override
     public void refresh(PictureModel pic) {
         this.pictureModel = pic;
-        //exifPresentationModel.refresh(pic.getExif());
-        //iptcPresentationModel.refresh(pic.getIptc());
-        //photographerPresentationModel.refresh(pic.getPhotographer());
+        exifPresentationModel.refresh(pic.getEXIF());
+        iptcPresentationModel.refresh(pic.getIPTC());
+        photographerPresentationModel.refresh(pic.getPhotographer());
         loadImage(pic);
     }
 
@@ -59,14 +58,10 @@ public class PicturePresentationModelImpl implements PicturePresentationModel {
 
     @Override
     public PictureModel getUpdatedModel() {
-
-        // TODO: save iptc
-        // TODO: save exif not really
-
+        iptcPresentationModel.saveChanges(pictureModel.getIPTC());
         refresh(pictureModel);
         return pictureModel;
     }
-
 
     @Override
     public int getID() {

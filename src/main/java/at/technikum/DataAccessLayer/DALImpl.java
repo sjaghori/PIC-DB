@@ -1,8 +1,11 @@
 package at.technikum.DataAccessLayer;
 
+import at.technikum.Model.EXIFModelImpl;
+import at.technikum.Model.IPTCModelImpl;
 import at.technikum.Model.PhotographerModelImpl;
 import at.technikum.Model.PictureModelImpl;
 import at.technikum.interfaces.DataAccessLayer;
+import at.technikum.interfaces.ExposurePrograms;
 import at.technikum.interfaces.models.*;
 
 import java.sql.*;
@@ -10,6 +13,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javafx.beans.property.StringProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,21 +36,50 @@ public class DALImpl implements DataAccessLayer {
 
     @Override
     public Collection<PictureModel> getPictures() {
-        String query = "select * from picture";
+        String query = "select * from picture " +
+                "JOIN iptc i on picture.id = i.fk_picture_id " +
+                "JOIN exif e on picture.id = e.fk_picture_id " +
+                "JOIN photographer p on picture.fk_photographer = p.id";
         List<PictureModel> pictureList = new ArrayList<>();
         PictureModel pictureModel = null;
+        EXIFModel exifModel = null;
+        IPTCModel iptcModel = null;
+        PhotographerModel photographerModel = null;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 pictureModel = new PictureModelImpl(resultSet.getInt("id"),
                         resultSet.getString("name"), resultSet.getString("pic_path"));
+                exifModel = new EXIFModelImpl();
+                createEXIF(exifModel, resultSet);
+
+                iptcModel = new IPTCModelImpl();
+                createIPTC(iptcModel, resultSet);
+
+                photographerModel = new PhotographerModelImpl();
+                createPhotographer(resultSet, photographerModel);
+
+                pictureModel.setEXIF(exifModel);
+                pictureModel.setIPTC(iptcModel);
+                pictureModel.setPhotographer(photographerModel);
+
                 pictureList.add(pictureModel);
             }
         } catch (SQLException e) {
             logger.error("SQLException: " + e.toString());
         }
         return pictureList;
+    }
+
+    private void createEXIF(EXIFModel exifModel, ResultSet resultSet) throws SQLException {
+        exifModel.setMake(resultSet.getString("make"));
+        ExposurePrograms exposurePrograms = ExposurePrograms.Normal;
+        exifModel.setExposureProgram(exposurePrograms);
+        exifModel.setFlash(resultSet.getBoolean("flash"));
+        exifModel.setFNumber(resultSet.getFloat("fNumber"));
+        exifModel.setISOValue(resultSet.getDouble("isoValue"));
+        exifModel.setExposureTime(resultSet.getDouble("exposureTime"));
     }
 
     @Override
@@ -57,14 +91,35 @@ public class DALImpl implements DataAccessLayer {
     @Override
     public PictureModel getPicture(int ID) {
         // TODO: JOIN IPTC, EXIF
-        String query = "select id, name, pic_path from Picture where id=?";
+        String query = "select * from picture " +
+                "JOIN iptc i on picture.id = i.fk_picture_id " +
+                "JOIN exif e on picture.id = e.fk_picture_id " +
+                "JOIN photographer p on picture.fk_photographer = p.id where picture.id=?";
         PictureModel pictureModel = null;
+        EXIFModel exifModel = null;
+        IPTCModel iptcModel = null;
+        PhotographerModel photographerModel = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, ID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 pictureModel = new PictureModelImpl(resultSet.getInt("id"),
                         resultSet.getString("name"), resultSet.getString("pic_path"));
+
+                exifModel = new EXIFModelImpl();
+                createEXIF(exifModel, resultSet);
+
+
+                iptcModel = new IPTCModelImpl();
+                createIPTC(iptcModel, resultSet);
+
+                photographerModel = new PhotographerModelImpl();
+                createPhotographer(resultSet, photographerModel);
+
+                pictureModel.setEXIF(exifModel);
+                pictureModel.setIPTC(iptcModel);
+                pictureModel.setPhotographer(photographerModel);
+
             }
         } catch (SQLException e) {
             logger.error("SQLException: " + e.toString());
@@ -72,7 +127,47 @@ public class DALImpl implements DataAccessLayer {
         return pictureModel;
     }
 
-    // TODO: save picture
+    private void createIPTC(IPTCModel iptcModel, ResultSet resultSet) throws SQLException {
+        iptcModel.setCopyrightNotice(resultSet.getString("copyrightNotice"));
+        iptcModel.setHeadline(resultSet.getString("headline"));
+        iptcModel.setKeywords(resultSet.getString("keywords"));
+    }
+
+    @Override
+    public void updatePicture(PictureModel picture) {
+
+        IPTCModel iptcModel = picture.getIPTC();
+        PhotographerModel photographerModel = picture.getPhotographer();
+
+        String updateIPTC = "update iptc join picture p on iptc.fk_picture_id = p.id " +
+                "set keywords = ?, copyrightNotice = ? , headline = ? where p.name = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updateIPTC)) {
+            // Update IPTC
+            preparedStatement.setString(1, iptcModel.getKeywords());
+            preparedStatement.setString(2, iptcModel.getCopyrightNotice());
+            preparedStatement.setString(3, iptcModel.getHeadline());
+            preparedStatement.setString(4, picture.getFileName());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error("SQLException: " + e.toString());
+        }
+        /*
+        String updatePHOTOGRAPHER = "update PHOTOGRAPHER set FORENAME = ?, NAME = ?, BIRTH = ?, NOTE = ? where picture.name = '?'";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(updatePHOTOGRAPHER)) {
+            // Update PHOTOGRAPHER
+            preparedStatement.setString(1, pg.getFirstName());
+            preparedStatement.setString(2, pg.getLastName());
+            preparedStatement.setDate(3, Date.valueOf(pg.getBirthday()));
+            preparedStatement.setString(4, pg.getNotes());
+            preparedStatement.setString(5, pic.getFilename());
+            preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error("SQLException: " + e.toString());
+        }*/
+    }
+
+
     @Override
     public void save(PictureModel picture) {
         String query = "****************************************************************************";
@@ -81,13 +176,9 @@ public class DALImpl implements DataAccessLayer {
 
 
             preparedStatement.executeUpdate();
-            // connection.commit();
         } catch (SQLException e) {
             logger.error("SQLException: " + e.toString());
         }
-
-
-
     }
 
     @Override
@@ -96,7 +187,6 @@ public class DALImpl implements DataAccessLayer {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, ID);
             preparedStatement.executeUpdate();
-            // connection.commit();
         } catch (SQLException e) {
             logger.error("SQLException: " + e.toString());
         }
@@ -115,7 +205,7 @@ public class DALImpl implements DataAccessLayer {
                 photographerList.add(photographer);
             }
         } catch (SQLException e) {
-            logger.error("SQLException Here: " + e.toString());
+            logger.error("SQLException: " + e.toString());
         }
         return photographerList;
     }
@@ -147,9 +237,7 @@ public class DALImpl implements DataAccessLayer {
             } else {
                 preparedStatement.setDate(3, null);
             }
-            
             preparedStatement.executeUpdate();
-            // connection.commit();
         } catch (SQLException e) {
             logger.error("SQLException: " + e.toString());
         }
@@ -161,7 +249,6 @@ public class DALImpl implements DataAccessLayer {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, ID);
             preparedStatement.executeUpdate();
-            // connection.commit();
         } catch (SQLException e) {
             logger.error("SQLException: " + e.toString());
         }

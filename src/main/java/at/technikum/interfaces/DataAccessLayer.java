@@ -37,6 +37,9 @@ public interface DataAccessLayer {
 	 */
 	void save(PictureModel picture);
 
+
+	void updatePicture(PictureModel picture);
+
 	/**
 	 * Deletes a Picture from the database.
 	 * 

@@ -14,15 +14,16 @@
     <!--Menu Bar View-->
     <fx:include source="View/menuBarWindow.fxml"/>
 
-    <SplitPane dividerPositions="0.3" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.4" orientation="VERTICAL" VBox.vgrow="ALWAYS">
         <VBox>
-            <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
+            <SplitPane dividerPositions="0.77" VBox.vgrow="ALWAYS">
                 <!--Image View-->
                 <AnchorPane fx:id="bigImageContainer" minWidth="-Infinity" prefWidth="300.0">
                     <ImageView fx:id="bigImage" Binding.twoWay="{image=image}" preserveRatio="true">
                     </ImageView>
                 </AnchorPane>
                 <TabPane minWidth="-Infinity" prefWidth="235.0" tabClosingPolicy="unavailable">
+
                     <!--IPTC TAB View-->
                     <Tab text="IPTC">
                         <AnchorPane fx:id="iptcView">
@@ -47,6 +48,7 @@
                             </VBox>
                         </AnchorPane>
                     </Tab>
+
                     <!--EXIF TAB View-->
                     <Tab text="EXIF">
                         <AnchorPane fx:id="exifView">
@@ -70,6 +72,7 @@
                             </VBox>
                         </AnchorPane>
                     </Tab>
+
                     <!--PHOTOGRAPHER TAB View-->
                     <Tab text="PHOTOGRAPHER">
                         <AnchorPane>
@@ -86,6 +89,7 @@
                 </TabPane>
             </SplitPane>
         </VBox>
+
         <!--Custom UI Control-->
         <ImageListView/>
     </SplitPane>

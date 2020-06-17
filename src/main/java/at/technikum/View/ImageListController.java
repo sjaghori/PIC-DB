@@ -49,20 +49,7 @@ public class ImageListController extends AbstractController {
                         // Must call super
                         super.updateItem(item, empty);
 
-                        int index = this.getIndex();
-                        String filename = null;
-
-                        // Format filename
-                        if (item == null || empty) {
-                            // No action to perform
-                        } else {
-                            filename = String.valueOf(item);
-                        }
-
-                        //imageView.setImage((Image) item);
-
-                        //this.setText(filename);
-
+                        setText(null);
                         setGraphic((Node) item);
                     }
                 };

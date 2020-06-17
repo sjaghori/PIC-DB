@@ -36,11 +36,13 @@ public class MainController extends AbstractController {
         bigImage.fitHeightProperty().bind(bigImageContainer.heightProperty());
 
         Binding.applyBinding(bigImage, mainWindowPresentationModel.getCurrentPicture());
-        //Binding.applyBinding(iptcView, mainWindowPresentationModel.getCurrentPicture().getIPTC());
-        //Binding.applyBinding(exifView, mainWindowPresentationModel.getCurrentPicture().getEXIF());
+        Binding.applyBinding(iptcView, mainWindowPresentationModel.getCurrentPicture().getIPTC());
+        Binding.applyBinding(exifView, mainWindowPresentationModel.getCurrentPicture().getEXIF());
     }
 
     public void onSaveChanges() {
+        mainWindowPresentationModel.saveChanges();
+
     }
 
     public void initData(int index) {

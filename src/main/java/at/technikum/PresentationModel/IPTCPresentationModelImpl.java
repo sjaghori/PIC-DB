@@ -1,5 +1,6 @@
 package at.technikum.PresentationModel;
 
+import at.technikum.interfaces.models.IPTCModel;
 import at.technikum.interfaces.presentationmodels.IPTCPresentationModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -8,13 +9,26 @@ import java.util.Collection;
 
 public class IPTCPresentationModelImpl implements IPTCPresentationModel {
 
-
     private StringProperty keywords = new SimpleStringProperty();
     private StringProperty copyright = new SimpleStringProperty();
     private StringProperty headline = new SimpleStringProperty();
 
-    public IPTCPresentationModelImpl() {
+    public IPTCPresentationModelImpl(IPTCModel iptcModel) {
+        refresh(iptcModel);
+    }
 
+    @Override
+    public void refresh(IPTCModel iptc) {
+        keywords.setValue(iptc.getKeywords());
+        copyright.setValue(iptc.getCopyrightNotice());
+        headline.setValue(iptc.getHeadline());
+    }
+
+    @Override
+    public void saveChanges(IPTCModel iptcModel) {
+        iptcModel.setKeywords(keywords.getValue());
+        iptcModel.setHeadline(headline.getValue());
+        iptcModel.setCopyrightNotice(copyright.getValue());
     }
 
     public StringProperty keywordsProperty() {

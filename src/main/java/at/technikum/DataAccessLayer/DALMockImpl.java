@@ -35,6 +35,11 @@ public class DALMockImpl implements DataAccessLayer {
     }
 
     @Override
+    public void updatePicture(PictureModel picture) {
+
+    }
+
+    @Override
     public void deletePicture(int ID) {
 
     }

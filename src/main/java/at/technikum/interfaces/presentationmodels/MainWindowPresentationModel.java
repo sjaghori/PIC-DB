@@ -22,4 +22,6 @@ public interface MainWindowPresentationModel {
 
 	void selectPicture(int selectedIndex);
 
+	void saveChanges();
+
 }

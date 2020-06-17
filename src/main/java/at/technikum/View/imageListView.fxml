@@ -3,6 +3,6 @@
 <?import javafx.scene.control.ListView?>
 
 <?import javafx.scene.layout.StackPane?>
-<StackPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" minHeight="250">
         <ListView fx:id="pictureListView" onMouseClicked="#selectImage" orientation="HORIZONTAL"/>
 </StackPane>

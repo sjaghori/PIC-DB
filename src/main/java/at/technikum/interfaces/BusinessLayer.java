@@ -31,6 +31,10 @@ public interface BusinessLayer {
 	 */
 	PictureModel getPicture(int ID);
 
+
+	void updatePicture(PictureModel picture);
+
+
 	/**
 	 * Saves all changes to the database.
 	 * 
