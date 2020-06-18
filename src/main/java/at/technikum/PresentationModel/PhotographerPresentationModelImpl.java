@@ -135,6 +135,7 @@ public class PhotographerPresentationModelImpl implements PhotographerPresentati
 
     @Override
     public boolean isValidBirthDay() {
+        today = LocalDate.now();
         return !(birthday.get().isAfter(today) || birthday.get().isEqual(today));
     }
 

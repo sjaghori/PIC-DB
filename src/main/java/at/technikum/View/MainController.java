@@ -8,8 +8,6 @@ import at.technikum.interfaces.AbstractController;
 import at.technikum.interfaces.BusinessLayer;
 import at.technikum.interfaces.models.PhotographerModel;
 import at.technikum.interfaces.presentationmodels.MainWindowPresentationModel;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;

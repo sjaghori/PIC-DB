@@ -56,7 +56,7 @@ public class Report {
     /**
      * Creates and structures actual pdf document
      *
-     * @return void
+     *
      */
     public void createReport() {
         OutputStream dest = null;
