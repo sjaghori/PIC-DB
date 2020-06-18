@@ -62,4 +62,9 @@ public class PhotographerModelImpl implements PhotographerModel {
     public void setNotes(String value) {
         this.notes = value;
     }
+
+    @Override
+    public String toString() {
+        return lastName;
+    }
 }

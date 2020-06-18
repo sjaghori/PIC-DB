@@ -1,5 +1,6 @@
 package at.technikum.interfaces.presentationmodels;
 
+import at.technikum.interfaces.models.PhotographerModel;
 import at.technikum.interfaces.presentationmodels.PictureListPresentationModel;
 import at.technikum.interfaces.presentationmodels.PicturePresentationModel;
 import at.technikum.interfaces.presentationmodels.SearchPresentationModel;
@@ -22,6 +23,8 @@ public interface MainWindowPresentationModel {
 
 	void selectPicture(int selectedIndex);
 
-	void saveChanges();
+	void saveChanges(PhotographerModel photographerModel);
+
+	void loadSearchedPictures();
 
 }

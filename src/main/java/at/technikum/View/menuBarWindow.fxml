@@ -16,7 +16,7 @@
             <MenuItem text="Edit Photographers" onAction="#onEditPhotographer"/>
         </Menu>
         <Menu fx:id="option_bar" text="Tools">
-            <MenuItem text="Tagging Statistics"/>
+            <MenuItem text="Tagging Statistics" onAction="#onCreateTags"/>
             <MenuItem text="Create Reports" onAction="#onCreateReport"/>
         </Menu>
     </MenuBar>

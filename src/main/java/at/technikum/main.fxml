@@ -14,7 +14,7 @@
     <!--Menu Bar View-->
     <fx:include source="View/menuBarWindow.fxml"/>
 
-    <SplitPane dividerPositions="0.4" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+    <SplitPane orientation="VERTICAL" VBox.vgrow="ALWAYS">
         <VBox>
             <SplitPane dividerPositions="0.77" VBox.vgrow="ALWAYS">
                 <!--Image View-->
@@ -75,13 +75,15 @@
 
                     <!--PHOTOGRAPHER TAB View-->
                     <Tab text="PHOTOGRAPHER">
-                        <AnchorPane>
+                        <AnchorPane fx:id="photographerTabView">
                             <VBox spacing="5.0" AnchorPane.leftAnchor="0.0"
                                   AnchorPane.rightAnchor="0.0">
                                 <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                 </padding>
-                                <ChoiceBox prefWidth="Infinity" Binding.twoWay="{text=photographer}">
+                                <Label text="Current Photographer: "/>
+                                <Label Binding.twoWay="{text=currentPhotographer}>"/>
+                                <ChoiceBox fx:id="photographerBox" prefWidth="200" Binding.twoWay="{value=tabPhotographer}">
                                 </ChoiceBox>
                             </VBox>
                         </AnchorPane>

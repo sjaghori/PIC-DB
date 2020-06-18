@@ -19,6 +19,7 @@ public class Report {
 
     private static final Logger logger = LogManager.getLogger(Report.class);
 
+    PictureModel pictureModel;
     String reportFilename;
     String imageFileName;
     String photographerName;
@@ -39,6 +40,7 @@ public class Report {
         this.reportFilename = setFilename(reportFilename);
         this.imageFileName = picture.getFileName();
         this.photographerName = "Sasan Jaghori";
+        this.pictureModel = picture;
     }
 
     /**
@@ -62,7 +64,7 @@ public class Report {
             // Creating a PdfWriter
             dest = new FileOutputStream(reportFilename);
         } catch (IOException e) {
-
+            logger.error("IOException: " + e.toString());
         }
 
 
@@ -105,7 +107,7 @@ public class Report {
             PdfPTable iptcTable = createIPTC_Table();
             document.add(iptcTable);
 
-            createPhotographerText(canvas, this.photographerName);
+            createPhotographerText(canvas);
             // Closing the document
             document.close();
         } catch (DocumentException e) {
@@ -138,9 +140,9 @@ public class Report {
         return canvas;
     }
 
-    private void createPhotographerText(PdfContentByte canvas, String photographerName) {
+    private void createPhotographerText(PdfContentByte canvas) {
         // Photograph
-        Phrase photographName = new Phrase("made with <3 by " + photographerName,
+        Phrase photographName = new Phrase("made with <3 by " + pictureModel.getPhotographer().getLastName(),
                 FontFactory.getFont(FontFactory.COURIER_OBLIQUE, 15));
         ColumnText.showTextAligned(canvas, Element.ALIGN_LEFT, photographName, 150, 30, 0);
     }
@@ -155,11 +157,11 @@ public class Report {
         cell2.setColspan(4);
         iptcTable.addCell(cell2);
         iptcTable.addCell("keywords:");
-        iptcTable.addCell("");
+        iptcTable.addCell(pictureModel.getIPTC().getKeywords());
         iptcTable.addCell("copyrightNotice:");
-        iptcTable.addCell("");
+        iptcTable.addCell(pictureModel.getIPTC().getCopyrightNotice());
         iptcTable.addCell("headline:");
-        iptcTable.addCell("");
+        iptcTable.addCell(pictureModel.getIPTC().getHeadline());
         iptcTable.setSpacingAfter(30f);
         return iptcTable;
     }
@@ -174,17 +176,17 @@ public class Report {
         cell.setColspan(4);
         exifTable.addCell(cell);
         exifTable.addCell("make:");
-        exifTable.addCell("");
+        exifTable.addCell(pictureModel.getEXIF().getMake());
         exifTable.addCell("fNumber:");
-        exifTable.addCell("");
+        exifTable.addCell(String.valueOf(pictureModel.getEXIF().getFNumber()));
         exifTable.addCell("exposureTime:");
-        exifTable.addCell("");
+        exifTable.addCell(String.valueOf(pictureModel.getEXIF().getExposureTime()));
         exifTable.addCell("isoValue:");
-        exifTable.addCell("");
+        exifTable.addCell(String.valueOf(pictureModel.getEXIF().getISOValue()));
         exifTable.addCell("flash:");
-        exifTable.addCell("");
+        exifTable.addCell(String.valueOf(pictureModel.getEXIF().getFlash()));
         exifTable.addCell("exposurePrograms:");
-        exifTable.addCell("");
+        exifTable.addCell(String.valueOf(pictureModel.getEXIF().getExposureProgram()));
         return exifTable;
     }
 

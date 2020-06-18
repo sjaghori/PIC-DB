@@ -1,5 +1,8 @@
 package at.technikum.PresentationModel;
 
+import at.technikum.Business.BusinessLayerImpl;
+import at.technikum.interfaces.BusinessLayer;
+import at.technikum.interfaces.models.PictureModel;
 import at.technikum.interfaces.presentationmodels.SearchPresentationModel;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,8 +10,11 @@ import javafx.beans.property.StringProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 public class SearchPresentationModelImpl implements SearchPresentationModel {
     private static final Logger logger = LogManager.getLogger(SearchPresentationModelImpl.class);
+    BusinessLayer dal = BusinessLayerImpl.getInstance();
 
     private StringProperty searchText = new SimpleStringProperty();
 
@@ -30,12 +36,14 @@ public class SearchPresentationModelImpl implements SearchPresentationModel {
     }
 
     @Override
-    public String getSearchText() {
-        return this.searchText.get() != null ? this.searchText.get() : "";
+    public List<PictureModel> getSearchedPictures() {
+        String searchText = getSearchText();
+        return dal.getPictures(searchText);
     }
 
     @Override
-    public void setSearchText(String value) {
+    public String getSearchText() {
+        return this.searchText.get() != null ? this.searchText.get() : "";
     }
 
     @Override

@@ -1,6 +1,8 @@
 package at.technikum.interfaces;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import at.technikum.interfaces.models.*;
 
@@ -19,9 +21,7 @@ public interface BusinessLayer {
 	 * 
 	 * @return
 	 */
-	Collection<PictureModel> getPictures(String namePart,
-			PhotographerModel photographerParts, IPTCModel iptcParts,
-			EXIFModel exifParts) throws Exception;
+	List<PictureModel> getPictures(String searchText);
 
 	/**
 	 * Returns ONE Picture from the database.
@@ -31,6 +31,7 @@ public interface BusinessLayer {
 	 */
 	PictureModel getPicture(int ID);
 
+	void changePhotographer(PictureModel pictureModel, PhotographerModel photographerModel);
 
 	void updatePicture(PictureModel picture);
 
@@ -120,5 +121,10 @@ public interface BusinessLayer {
 	 * @param iptc
 	 */
 	void writeIPTC(String filename, IPTCModel iptc);
+
+	Set<String> getDistinctKeyword();
+
+	int getKeywordsCount(String keyword);
+
 
 }

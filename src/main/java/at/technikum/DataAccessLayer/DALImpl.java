@@ -9,10 +9,9 @@ import at.technikum.interfaces.ExposurePrograms;
 import at.technikum.interfaces.models.*;
 
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import javafx.beans.property.StringProperty;
 import org.apache.logging.log4j.LogManager;
@@ -83,9 +82,46 @@ public class DALImpl implements DataAccessLayer {
     }
 
     @Override
-    public Collection<PictureModel> getPictures(String namePart, PhotographerModel photographerParts,
-                                                IPTCModel iptcParts, EXIFModel exifParts) throws Exception {
-        return null;
+    public List<PictureModel> getPictures(String searchText) {
+        List<PictureModel> pictureModels = new ArrayList<>();
+        PictureModel pictureModel = null;
+        EXIFModel exifModel = null;
+        IPTCModel iptcModel = null;
+        PhotographerModel photographerModel = null;
+        String query = "SELECT * FROM picture " +
+                "JOIN iptc on picture.id = iptc.fk_picture_id " +
+                "JOIN exif e on picture.id = e.fk_picture_id " +
+                "JOIN photographer p on picture.fk_photographer = p.id " +
+                "WHERE keywords like ? or lastname like ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + searchText + "%");
+            preparedStatement.setString(2, searchText);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                pictureModel = new PictureModelImpl(resultSet.getInt("id"),
+                        resultSet.getString("name"), resultSet.getString("pic_path"));
+
+                exifModel = new EXIFModelImpl();
+                createEXIF(exifModel, resultSet);
+
+
+                iptcModel = new IPTCModelImpl();
+                createIPTC(iptcModel, resultSet);
+
+                photographerModel = new PhotographerModelImpl();
+                createPhotographer(resultSet, photographerModel);
+
+                pictureModel.setEXIF(exifModel);
+                pictureModel.setIPTC(iptcModel);
+                pictureModel.setPhotographer(photographerModel);
+                pictureModels.add(pictureModel);
+            }
+
+        } catch (SQLException e) {
+            logger.error("SQLException: " + e.toString());
+        }
+
+        return pictureModels;
     }
 
     @Override
@@ -267,6 +303,61 @@ public class DALImpl implements DataAccessLayer {
         } catch (SQLException e) {
             logger.error("SQLException updatePhotographer: " + e.toString());
         }
+    }
+
+    @Override
+    public void changePhotographer(PictureModel pictureModel, PhotographerModel photographerModel) {
+        String getID = "select id from photographer where lastname = ?";
+        String updatePhotographer = "update picture set fk_photographer = ? where name = ?";
+        int id = 1;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getID)) {
+            preparedStatement.setString(1, photographerModel.getLastName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("id");
+
+        } catch (SQLException e) {
+            logger.error("SQLException updatePhotographer: " + e.toString());
+        }
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updatePhotographer)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, pictureModel.getFileName());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error("SQLException updatePhotographer: " + e.toString());
+        }
+    }
+
+    @Override
+    public Set<String> getDistinctKeyword() {
+        Set<String> keywords = new HashSet<>();
+        String query = "select distinct keywords from iptc JOIN picture p on iptc.fk_picture_id = p.id";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                keywords.add(resultSet.getString("keywords"));
+            }
+        } catch (SQLException e) {
+            logger.error("SQLException updatePhotographer: " + e.toString());
+        }
+        return keywords;
+    }
+
+    @Override
+    public int getKeywordsCount(String keyword) {
+        int count = 0;
+        String query = "select count(*) as COUNT from picture JOIN iptc i on picture.id = i.fk_picture_id where i.keywords = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, keyword);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt("COUNT");
+        } catch (SQLException e) {
+            logger.error("SQLException updatePhotographer: " + e.toString());
+        }
+        return count;
     }
 
     private void createPhotographer(ResultSet resultSet, PhotographerModel photographer) throws SQLException {

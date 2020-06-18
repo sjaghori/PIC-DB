@@ -46,10 +46,8 @@ commit;
 
 DROP DATABASE picdb;
 
-SELECT * FROM picture
-JOIN iptc on picture.id = iptc.fk_picture_id
-JOIN photographer p on picture.fk_photographer = p.id
-WHERE keywords like "%%" or lastname like "";
+SELECT * FROM picture JOIN iptc on picture.id = iptc.fk_picture_id JOIN exif e on picture.id = e.fk_picture_id JOIN photographer p on picture.fk_photographer = p.id WHERE keywords like 'nature' or lastname like 'nature';
+
 
 select * from picture JOIN iptc i on picture.id = i.fk_picture_id JOIN exif e on picture.id = e.fk_picture_id JOIN photographer p on picture.fk_photographer = p.id where picture.id = 1;
 
@@ -59,3 +57,16 @@ select * from picture JOIN iptc i on picture.id = i.fk_picture_id JOIN exif e on
 select * from iptc join picture p on iptc.fk_picture_id = p.id where p.name = 'parrot.jpg';
 
 update iptc join picture p on iptc.fk_picture_id = p.id set keywords = ?, copyrightNotice = ? , headline = ? where p.name = ?
+
+
+select firstname, lastname, birthdate, notes from photographer join picture on photographer.id = picture.fk_photographer where name = 'parrot.jpg';
+
+
+select * from picture JOIN photographer p on picture.fk_photographer = p.id;
+
+
+select distinct count(*) as COUNT from iptc;
+
+select distinct keywords from iptc JOIN picture p on iptc.fk_picture_id = p.id;
+
+select count(*) as COUNT from picture JOIN iptc i on picture.id = i.fk_picture_id where i.keywords = 'bird';

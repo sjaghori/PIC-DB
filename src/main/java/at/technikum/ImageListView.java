@@ -17,7 +17,8 @@ public class ImageListView extends StackPane {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("View/imageListView.fxml"));
 
-            controller = new ImageListController();
+            //controller = new ImageListController();
+            controller = ImageListController.getInstance();
             loader.setController(controller);
             Node n = loader.load();
             this.getChildren().add(n);

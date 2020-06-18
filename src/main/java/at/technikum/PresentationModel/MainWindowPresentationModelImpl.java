@@ -2,6 +2,7 @@ package at.technikum.PresentationModel;
 
 import at.technikum.Business.BusinessLayerImpl;
 import at.technikum.interfaces.BusinessLayer;
+import at.technikum.interfaces.models.PhotographerModel;
 import at.technikum.interfaces.models.PictureModel;
 import at.technikum.interfaces.presentationmodels.MainWindowPresentationModel;
 import at.technikum.interfaces.presentationmodels.PictureListPresentationModel;
@@ -21,6 +22,9 @@ public class MainWindowPresentationModelImpl implements MainWindowPresentationMo
         if (instance == null)
             instance = new MainWindowPresentationModelImpl();
         return instance;
+    }
+
+    private MainWindowPresentationModelImpl() {
     }
 
     // Presentation Models
@@ -59,28 +63,24 @@ public class MainWindowPresentationModelImpl implements MainWindowPresentationMo
         }
     //}
 
-    public void saveChanges() {
+    public void saveChanges(PhotographerModel photographerModel) {
         PictureModel pic = picturePresentationModel.getUpdatedModel();
         dal.updatePicture(pic);
+        if (photographerModel != null) {
+            dal.changePhotographer(pic, photographerModel);
+        }
         picturePresentationModel.refresh(pic);
     }
 
-
-
-    /*
-    public void loadAllPictures() {
-        pictureViewModel.refresh(ps.getPicture(selectedIndex));
-        pictureListViewModel.refresh(ps.getAllPictures());
-        logger.info("Reloaded all images");
-    }
-
+    @Override
     public void loadSearchedPictures() {
+        /*
         String searchText = searchViewModel.searchTextProperty().get();
         List<PictureModel> searchResult = ps.searchPictures(searchText);
 
         logger.info("Searched for: " + searchText + "\nFound: " + searchResult);
 
         pictureViewModel.refresh(searchResult.get(0));
-        pictureListViewModel.refresh(searchResult);
-    }*/
+        pictureListViewModel.refresh(searchResult);*/
+    }
 }

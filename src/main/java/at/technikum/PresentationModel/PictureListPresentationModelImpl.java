@@ -26,6 +26,7 @@ public class PictureListPresentationModelImpl implements PictureListPresentation
         refresh(pictureList);
     }
 
+    @Override
     public void refresh(Collection<PictureModel> pictureList) {
         this.pics.clear();
         Properties properties = Configurations.readProperties();

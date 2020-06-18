@@ -2,6 +2,7 @@ package at.technikum.interfaces.presentationmodels;
 
 import java.util.Collection;
 
+import at.technikum.interfaces.models.PictureModel;
 import at.technikum.interfaces.presentationmodels.PicturePresentationModel;
 import javafx.collections.ObservableList;
 import javafx.scene.image.ImageView;
@@ -43,4 +44,6 @@ public interface PictureListPresentationModel {
 	String getCurrentPictureAsString();
 
 	ObservableList<ImageView> getpics();
+
+	void refresh(Collection<PictureModel> pictureModels);
 }

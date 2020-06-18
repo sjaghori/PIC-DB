@@ -4,6 +4,8 @@ import at.technikum.interfaces.DataAccessLayer;
 import at.technikum.interfaces.models.*;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 public class DALMockImpl implements DataAccessLayer {
 
@@ -19,8 +21,7 @@ public class DALMockImpl implements DataAccessLayer {
     }
 
     @Override
-    public Collection<PictureModel> getPictures(String namePart, PhotographerModel photographerParts,
-                                                IPTCModel iptcParts, EXIFModel exifParts) throws Exception {
+    public List<PictureModel> getPictures(String searchText) {
         return null;
     }
 
@@ -67,5 +68,20 @@ public class DALMockImpl implements DataAccessLayer {
     @Override
     public void updatePhotographer(PhotographerModel photographer, int index) {
 
+    }
+
+    @Override
+    public void changePhotographer(PictureModel pictureModel, PhotographerModel photographerModel) {
+
+    }
+
+    @Override
+    public Set<String> getDistinctKeyword() {
+        return null;
+    }
+
+    @Override
+    public int getKeywordsCount(String keyword) {
+        return 0;
     }
 }

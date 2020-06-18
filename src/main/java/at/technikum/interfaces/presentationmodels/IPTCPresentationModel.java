@@ -6,10 +6,6 @@ import java.util.Collection;
 
 public interface IPTCPresentationModel {
 
-	void refresh(IPTCModel iptcModel);
-
-	void saveChanges(IPTCModel iptcModel);
-
 	/**
 	 * A list of keywords
 	 */
@@ -44,11 +40,10 @@ public interface IPTCPresentationModel {
 
 	void setHeadline(String value);
 
-	/**
-	 * Caption/Abstract, a description of the picture
-	 */
-	String getCaption();
+	void refresh(IPTCModel iptcModel);
+	void saveChanges(IPTCModel iptcModel);
 
-	void setCaption(String value);
+	String getcurrentPhotographer();
+	void setcurrentPhotographer(String value);
 
 }

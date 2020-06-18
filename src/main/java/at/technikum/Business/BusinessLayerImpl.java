@@ -6,12 +6,15 @@ import at.technikum.interfaces.DataAccessLayer;
 import at.technikum.interfaces.models.*;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 public class BusinessLayerImpl implements BusinessLayer {
 
     private final DataAccessLayer _dal;
 
     private static BusinessLayerImpl instance = null;
+
     public static BusinessLayerImpl getInstance() {
         if (instance == null)
             instance = new BusinessLayerImpl();
@@ -26,33 +29,32 @@ public class BusinessLayerImpl implements BusinessLayer {
 
 
     @Override
-    public Collection<PictureModel> getPictures(){
+    public Collection<PictureModel> getPictures() {
         return _dal.getPictures();
     }
 
     @Override
-    public Collection<PictureModel> getPictures(String namePart, PhotographerModel photographerParts,
-                                                IPTCModel iptcParts, EXIFModel exifParts) throws Exception {
-        return _dal.getPictures(namePart, photographerParts, iptcParts, exifParts);
+    public List<PictureModel> getPictures(String searchText) {
+        return _dal.getPictures(searchText);
     }
 
     @Override
-    public PictureModel getPicture(int ID){
+    public PictureModel getPicture(int ID) {
         return _dal.getPicture(ID);
     }
 
     @Override
-    public void updatePicture(PictureModel picture){
+    public void updatePicture(PictureModel picture) {
         _dal.updatePicture(picture);
     }
 
     @Override
-    public void save(PictureModel picture){
+    public void save(PictureModel picture) {
         _dal.save(picture);
     }
 
     @Override
-    public void deletePicture(int ID){
+    public void deletePicture(int ID) {
         _dal.deletePicture(ID);
     }
 
@@ -87,6 +89,11 @@ public class BusinessLayerImpl implements BusinessLayer {
     }
 
     @Override
+    public void changePhotographer(PictureModel pictureModel, PhotographerModel photographerModel) {
+        _dal.changePhotographer(pictureModel, photographerModel);
+    }
+
+    @Override
     public IPTCModel extractIPTC(String filename) {
         return null;
     }
@@ -98,5 +105,15 @@ public class BusinessLayerImpl implements BusinessLayer {
 
     @Override
     public void writeIPTC(String filename, IPTCModel iptc) {
+    }
+
+    @Override
+    public Set<String> getDistinctKeyword() {
+        return _dal.getDistinctKeyword();
+    }
+
+    @Override
+    public int getKeywordsCount(String keyword) {
+        return _dal.getKeywordsCount(keyword);
     }
 }

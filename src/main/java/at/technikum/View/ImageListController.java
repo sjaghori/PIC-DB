@@ -20,6 +20,13 @@ public class ImageListController extends AbstractController {
 
     MainController mainController = MainController.getInstance();
 
+    private static ImageListController instance = null;
+    public static ImageListController getInstance() throws Exception {
+        if (instance == null)
+            instance = new ImageListController();
+        return instance;
+    }
+
     @FXML
     private ListView pictureListView;
 
@@ -27,9 +34,7 @@ public class ImageListController extends AbstractController {
 
     MainWindowPresentationModel main;
 
-    public ImageListController() throws Exception {
-
-    }
+    public ImageListController() throws Exception { }
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -62,8 +67,15 @@ public class ImageListController extends AbstractController {
         int selectedIndex = pictureListView.getItems().indexOf(selectedImage);
         selectedIndex += 1;
         if (selectedIndex == -1) {
-            selectedIndex = 0;
+            selectedIndex = 1;
         }
         main.selectPicture(selectedIndex);
     }
+
+    public void refreshList() {
+        list = main.getList().getpics();
+        pictureListView.getItems().clear();
+        pictureListView.getItems().addAll(list);
+    }
+
 }

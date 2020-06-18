@@ -13,6 +13,9 @@ public class IPTCPresentationModelImpl implements IPTCPresentationModel {
     private StringProperty copyright = new SimpleStringProperty();
     private StringProperty headline = new SimpleStringProperty();
 
+    StringProperty currentPhotographer = new SimpleStringProperty();
+    String photographer;
+
     public IPTCPresentationModelImpl(IPTCModel iptcModel) {
         refresh(iptcModel);
     }
@@ -89,12 +92,16 @@ public class IPTCPresentationModelImpl implements IPTCPresentationModel {
     }
 
     @Override
-    public String getCaption() {
-        return null;
+    public String getcurrentPhotographer() {
+        return this.currentPhotographer.get() != null ? this.currentPhotographer.get() : "";
     }
 
     @Override
-    public void setCaption(String value) {
+    public void setcurrentPhotographer(String value) {
+        this.currentPhotographer.setValue(value);
+    }
 
+    StringProperty currentPhotographerProperty() {
+        return currentPhotographer;
     }
 }

@@ -1,12 +1,16 @@
 package at.technikum.interfaces.presentationmodels;
 
+import at.technikum.interfaces.models.PictureModel;
+
+import java.util.List;
+
 public interface SearchPresentationModel {
 	/**
 	 * The search text
 	 */
 	String getSearchText();
 
-	void setSearchText(String value);
+	List<PictureModel> getSearchedPictures();
 
 	/**
 	 * True, if a search is active

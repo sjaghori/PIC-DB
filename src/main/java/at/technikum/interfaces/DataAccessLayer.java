@@ -1,6 +1,8 @@
 package at.technikum.interfaces;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import at.technikum.interfaces.models.*;
 
@@ -18,9 +20,7 @@ public interface DataAccessLayer {
 	 * 
 	 * @return
 	 */
-	Collection<PictureModel> getPictures(String namePart,
-			PhotographerModel photographerParts, IPTCModel iptcParts,
-			EXIFModel exifParts) throws Exception;
+	List<PictureModel> getPictures(String searchText);
 
 	/**
 	 * Returns ONE Picture from the database.
@@ -85,5 +85,11 @@ public interface DataAccessLayer {
 	 * @param index
 	 */
 	void updatePhotographer(PhotographerModel photographer, int index);
+
+	void changePhotographer(PictureModel pictureModel, PhotographerModel photographerModel);
+
+	Set<String> getDistinctKeyword();
+
+	int getKeywordsCount(String keyword);
 
 }
